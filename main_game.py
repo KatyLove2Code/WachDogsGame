@@ -15,4 +15,4 @@ while game:
 pygame.quit()
 print("Katy Divina")
 print("Katy Divina from site")
-print('Gorelik Savva from pycharm')
+print('Gorelik Savva from pycharm, у которого ничего не работает')
