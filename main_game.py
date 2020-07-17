@@ -16,6 +16,6 @@ while game:
 pygame.quit()
 print("Katy Divina")
 print("Katy Divina from site")
-print('Gorelik Savva from pycharm, у которого ничего не работает')
+print('Gorelik Savva from pycharm, у которого теперь все работает')
 print("Artyom Shmavonyan")
 print("Katy Divina from pyCharm")
