@@ -7,7 +7,7 @@ pygame.init()
 win = pygame.display.set_mode((500, 500))
 
 pygame.display.set_caption("Mario")
-
+padOn = False
 x = 50
 y = 425
 width = 40
@@ -34,31 +34,51 @@ while  run:
 		if event.type == pygame.QUIT:
 			run = False
 
-
-	if my_joystick.get_hat(0) == (-1, -1):
-		x -= speed
-		y += speed
-	if my_joystick.get_hat(0) == (1, 1):
-		x += speed
-		y -= speed
-	if my_joystick.get_hat(0) == (-1, 1):
-		x -= speed
-		y -= speed
-	if my_joystick.get_hat(0) == (1, -1):
-		x += speed
-		y += speed
-
-
 	keys = pygame.key.get_pressed()
-	if keys[pygame.K_LEFT] or my_joystick.get_hat(0) == (-1, 0) and x > 5:
+
+	if keys[pygame.K_p] and padOn == False:
+		padOn = True
+		print("True")
+
+	if keys[pygame.K_o] and padOn == True:
+		padOn = False
+		print("False")
+	if padOn == True:
+
+		if my_joystick.get_hat(0) == (-1, -1):
+			x -= speed
+			y += speed
+		if my_joystick.get_hat(0) == (1, 1):
+			x += speed
+			y -= speed
+		if my_joystick.get_hat(0) == (-1, 1):
+			x -= speed
+			y -= speed
+		if my_joystick.get_hat(0) == (1, -1):
+			x += speed
+			y += speed
+		if my_joystick.get_hat(0) == (-1, 0):
+			x -= speed
+		if my_joystick.get_hat(0) == (1, 0):
+			x += speed
+		if  my_joystick.get_hat(0) == (0, 1):
+			y -= speed
+		if my_joystick.get_hat(0) == (0, -1):
+			y += speed
+
+
+
+
+
+	if keys[pygame.K_LEFT] and x > 5:
 		x -= speed
 
-	if keys[pygame.K_RIGHT] or my_joystick.get_hat(0) == (1, 0) and x < 500	 - width - 5:
+	if keys[pygame.K_RIGHT] and x < 500	 - width - 5:
 		x += speed
 	if not(isJump):
-		if keys[pygame.K_UP] or my_joystick.get_hat(0) == (0, 1) and y > 5:
+		if keys[pygame.K_UP] and y > 5:
 			y -= speed
-		if keys[pygame.K_DOWN] or my_joystick.get_hat(0) == (0, -1) and y < 500 - height - 15:
+		if keys[pygame.K_DOWN] and y < 500 - height - 15:
 			y += speed
 		if keys[pygame.K_SPACE]:
 			isJump = True
