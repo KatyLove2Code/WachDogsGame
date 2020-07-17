@@ -1,12 +1,14 @@
- #################################
+#################################
 #ЕСЛИ ХОТИТЕ ЧТО-ТО ИЗМЕНИТЬ ПРЕДУПРЕДИТЕ МЕНЯ!!!!
 #################################
 import pygame
-
 pygame.init()
-win = pygame.display.set_mode((500, 500))
-
+width_win = 500
+height_win = 500#РАЗМЕР ОКНА ПИШИТЕ СЮДА
+win = pygame.display.set_mode((width_win, height_win))
 pygame.display.set_caption("Mario")
+
+
 
 x = 50
 y = 425
@@ -25,11 +27,15 @@ joysticks = []
 for i in range(0, pygame.joystick.get_count()):
 	joysticks.append(pygame.joystick.Joystick(i))
 	joysticks[-1].init()
-
+cnopk_on = False
 run = True
+pygame.draw.rect(win, (0, 0, 255), (x, int(y), width, height))
 while  run:
 	pygame.time.delay(10)
 
+    while cnopk_on == False:
+		if pygame.MOUSEBUTTONDOWN
+			cnopk_on = True
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			run = False
@@ -71,10 +77,9 @@ while  run:
 			jumpCount = 10
 
 
-
 	win.fill((0,0,0))
 	pygame.draw.rect(win, (0, 0, 255), (x, int(y), width, height))
-	pygame.display.update()	
+	pygame.display.update()
 
 
-pygame.quit()			
+pygame.quit()
