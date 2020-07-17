@@ -20,7 +20,7 @@ while  run:
 
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
-	 		run = False
+			run = False
 	
 	keys = pygame.key.get_pressed()
 	if keys[pygame.K_LEFT] and x > 5:
@@ -34,13 +34,13 @@ while  run:
 			y += speed
 		if keys[pygame.K_SPACE]:
 			isJump = True
-    else:
-    	if jumpCount >= - 10:
-    		y -= (jumpCount ** 2) / 2
-    		jumpCount -= 1
-    	else:
-    		isJump = False
-    		jumpCount = 10
+	else:
+		if jumpCount >= - 10:
+			y -= (jumpCount ** 2) / 2
+			jumpCount -= 1
+		else:
+			isJump = False
+			jumpCount = 10
 
 
 
