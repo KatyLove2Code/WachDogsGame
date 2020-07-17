@@ -45,25 +45,25 @@ while  run:
 		print("False")
 	if padOn == True:
 
-		if my_joystick.get_hat(0) == (-1, -1):
+		if my_joystick.get_hat(0) == (-1, -1) and x > 5 and y < 500 - height - 15:
 			x -= speed
 			y += speed
-		if my_joystick.get_hat(0) == (1, 1):
+		if my_joystick.get_hat(0) == (1, 1) and x < 500	 - width - 5 and y > 5:
 			x += speed
 			y -= speed
-		if my_joystick.get_hat(0) == (-1, 1):
+		if my_joystick.get_hat(0) == (-1, 1) and x > 5 and y > 5:
 			x -= speed
 			y -= speed
-		if my_joystick.get_hat(0) == (1, -1):
+		if my_joystick.get_hat(0) == (1, -1) and x < 500	 - width - 5 and y < 500 - height - 15:
 			x += speed
 			y += speed
-		if my_joystick.get_hat(0) == (-1, 0):
+		if my_joystick.get_hat(0) == (-1, 0) and x > 5:
 			x -= speed
-		if my_joystick.get_hat(0) == (1, 0):
+		if my_joystick.get_hat(0) == (1, 0) and x < 500	 - width - 5:
 			x += speed
-		if  my_joystick.get_hat(0) == (0, 1):
+		if  my_joystick.get_hat(0) == (0, 1) and y > 5:
 			y -= speed
-		if my_joystick.get_hat(0) == (0, -1):
+		if my_joystick.get_hat(0) == (0, -1) and y < 500 - height - 15:
 			y += speed
 
 
