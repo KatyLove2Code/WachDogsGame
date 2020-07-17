@@ -10,6 +10,7 @@ while game:
         if e.type == pygame.QUIT:
             game = False
     maindisplay.fill((124,89, 194))
+    pygame.draw.circle(maindisplay, (255, 255, 0))
     pygame.display.update()
 
 pygame.quit()
