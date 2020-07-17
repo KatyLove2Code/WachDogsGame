@@ -16,18 +16,37 @@ speed = 5
 
 isJump = False
 jumpCount = 10
+pygame.joystick.init()
+
+my_joystick = pygame.joystick.Joystick(0)
+my_joystick.init()
+
+joysticks = []
+for i in range(0, pygame.joystick.get_count()):
+	joysticks.append(pygame.joystick.Joystick(i))
+	joysticks[-1].init()
 
 run = True
 while  run:
-	pygame.time.delay(50)
+	pygame.time.delay(10)
 
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			run = False
-	
+	if my_joystick.get_hat(0) == (0, 1):
+		y -= speed
+	if my_joystick.get_hat(0) == (0, -1):
+		y += speed
+	if my_joystick.get_hat(0) == (-1, 0):
+		x -= speed
+	if my_joystick.get_hat(0) == (1, 0):
+		x += speed
+
+
 	keys = pygame.key.get_pressed()
 	if keys[pygame.K_LEFT] and x > 5:
 		x -= speed
+
 	if keys[pygame.K_RIGHT] and x < 500	 - width - 5:
 		x += speed
 	if not(isJump):
