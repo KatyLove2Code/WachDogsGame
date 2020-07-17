@@ -7,12 +7,58 @@ pygame.init()
 win = pygame.display.set_mode((1024, 720))
 
 pygame.display.set_caption("Mario")
+
+walkRight = [pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_00.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_01.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_02.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_03.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_04.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_05.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_06.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_07.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_08.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_09.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_10.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_11.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_12.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_13.png")]
+
+walkLeft = [pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_00.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_01.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_02.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_03.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_04.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_05.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_06.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_07.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_08.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_09.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_10.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_11.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_12.png"),
+pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_13.png")]
+
+playerStand = [pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_00.png"),
+pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_01.png"),
+pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_02.png"),
+pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_03.png"),
+pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_04.png"),
+pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_05.png"),
+pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_06.png"),
+pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_07.png"),
+pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_08.png"),
+pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_09.png"),
+pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_10.png")]
+
+
+clock = pygame.time.Clock()
+
 padOn = False
 keyboard = True
 x = 50
 y = 425
-width = 40
-height = 60
+width = 65
+height = 65
 speed = 5
 
 isJump = False
@@ -21,6 +67,30 @@ jumpCount1 = 10
 pygame.joystick.init()
 left = False
 right = False
+animCount = 0;
+
+
+
+def drawWindow():
+	global animCount
+
+	win.fill((0, 0, 0))
+	
+	if animCount + 1 >= 60:
+		animCount = 0
+	
+	if left:
+		win.blit(walkLeft[animCount // 5], (x, y))
+		animCount += 1
+	elif right:
+		win.blit(walkRight[animCount // 5], (x, y))
+		animCount += 1
+	else:
+		win.blit(playerStand[animCount // 5], (x, y))
+		animCount += 1
+
+
+	pygame.display.update()
 
 
 try:
@@ -36,7 +106,7 @@ except:
 
 run = True
 while  run:
-	pygame.time.delay(10)
+	clock.tick(60)
 
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
@@ -96,11 +166,19 @@ while  run:
 
 	if keyboard == True:
 
-		if keys[pygame.K_LEFT] and x > 5:
+		if keys[pygame.K_a] and x > 5:
 			x -= speed
-
-		if keys[pygame.K_RIGHT] and x < 1024 - width - 5:
+			left = True
+			right = False
+		elif keys[pygame.K_d] and x < 1024 - width - 5:
 			x += speed
+			right = True
+			left = False
+		else:
+			left = False
+			right = False
+			animCount = 0
+
 		if not(isJump):
 
 			if keys[pygame.K_SPACE]:
@@ -116,11 +194,8 @@ while  run:
 				isJump = False
 				jumpCount = 10
 
+	drawWindow()
 
-
-	win.fill((0,0,0))
-	pygame.draw.rect(win, (0, 0, 255), (x, int(y), width, height))
-	pygame.display.update()
 
 
 pygame.quit()
