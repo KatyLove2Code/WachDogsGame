@@ -16,4 +16,5 @@ while game:
 pygame.quit()
 print("Katy Divina")
 print("Katy Divina from site")
+print("Artyom Shmavonyan")
 print("Katy Divina from pyCharm")
