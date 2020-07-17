@@ -19,13 +19,16 @@ isJump = False
 jumpCount = 10
 pygame.joystick.init()
 
-my_joystick = pygame.joystick.Joystick(0)
-my_joystick.init()
-
-joysticks = []
-for i in range(0, pygame.joystick.get_count()):
-	joysticks.append(pygame.joystick.Joystick(i))
-	joysticks[-1].init()
+try:
+	my_joystick = pygame.joystick.Joystick(0)
+	my_joystick.init()
+	joysticks = []
+	for i in range(0, pygame.joystick.get_count()):
+		joysticks.append(pygame.joystick.Joystick(i))
+		joysticks[-1].init()
+except:
+	print('Joystick not found')
+	padOn = False
 
 run = True
 while  run:
@@ -97,7 +100,7 @@ while  run:
 
 	win.fill((0,0,0))
 	pygame.draw.rect(win, (0, 0, 255), (x, int(y), width, height))
-	pygame.display.update()	
+	pygame.display.update()
 
 
-pygame.quit()			
+pygame.quit()
