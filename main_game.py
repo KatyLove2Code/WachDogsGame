@@ -10,9 +10,11 @@ while game:
         if e.type == pygame.QUIT:
             game = False
     maindisplay.fill((124,89, 194))
+    pygame.draw.circle(maindisplay, (255, 255, 0))
     pygame.display.update()
 
 pygame.quit()
 print("Katy Divina")
 print("Katy Divina from site")
+print("Artyom Shmavonyan")
 print("Katy Divina from pyCharm")

@@ -25,7 +25,7 @@ while  run:
 	keys = pygame.key.get_pressed()
 	if keys[pygame.K_LEFT] and x > 5:
 		x -= speed
-	if keys[pygame.K_RIGHT] and x < 500 - width - 5:
+	if keys[pygame.K_RIGHT] and x < 500	 - width - 5:
 		x += speed
 	if not(isJump):
 		if keys[pygame.K_UP] and y > 5:
@@ -45,7 +45,7 @@ while  run:
 
 
 	win.fill((0,0,0))
-	pygame.draw.rect(win, (0, 0, 255), (x, y, width, height))
+	pygame.draw.rect(win, (0, 0, 255), (x, int(y), width, height))
 	pygame.display.update()	
 
 
