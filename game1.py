@@ -42,17 +42,18 @@ clock = pygame.time.Clock()
 
 padOn = False
 keyboard = True
-<<<<<<< HEAD
+
+
 x = 50
 y = 425
 width = 600
 height = 600
-=======
+
 x = 5
 y = 5
 width = 65
 height = 65
->>>>>>> a7da98b083d2cf7f7f8b1e0f57c8b161644d6e03
+
 speed = 5
 
 isJump = False
