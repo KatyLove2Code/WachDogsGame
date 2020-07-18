@@ -35,7 +35,7 @@ pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_08.png"),
 pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_09.png"),
 pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_10.png")]
 
-bg = pygame.image.load('Tiles/bg/bg.jpg')
+bg = pygame.image.load('Tiles/bg/bg.png')
 
 
 clock = pygame.time.Clock()
@@ -65,15 +65,6 @@ right = False
 animCount = 0;
 
 
-i = 0
-while i <= 9:
-	idleAnim = [pygame.transform.scale(playerStand[i], (185, 185))] # уменьшение размера анимации
-	i += 1
-
-g = 0
-while g <= 13:
-	walkAnim = [pygame.transform.scale(walk[g], (185, 185))] # уменьшение размера анимации
-	g += 1
 
 
 def drawWindow(): # рисование всей карты
@@ -87,13 +78,13 @@ def drawWindow(): # рисование всей карты
 		animCount = 0
 	
 	if left:
-		win.blit(walkAnim[animCount // 5], (x, y)) # анимация персонажа
+		win.blit(walk[animCount // 5], (x, y)) # анимация персонажа
 		animCount += 1
 	elif right:
-		win.blit(walkAnim[animCount // 5], (x, y))
+		win.blit(walk[animCount // 5], (x, y))
 		animCount += 1
 	else:
-		win.blit(idleAnim[animCount // 5], (x, y))
+		win.blit(playerStand[animCount // 5], (x, y))
 		animCount += 1
 
 
