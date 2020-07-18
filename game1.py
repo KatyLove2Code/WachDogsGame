@@ -35,16 +35,25 @@ pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_08.png"),
 pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_09.png"),
 pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_10.png")]
 
+bg = pygame.image.load('Tiles/bg/bg.jpg')
 
 
 clock = pygame.time.Clock()
 
 padOn = False
 keyboard = True
+
+
+x = 50
+y = 425
+width = 600
+height = 600
+
 x = 5
 y = 5
 width = 65
 height = 65
+
 speed = 5
 
 isJump = False
@@ -72,7 +81,7 @@ def drawWindow(): # рисование всей карты
 	global walkAnim
 	global idleAnim
 
-	win.fill((0, 0, 0))
+	win.blit(bg, (0, 0))
 	
 	if animCount + 1 >= 60:
 		animCount = 0

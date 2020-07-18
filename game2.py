@@ -19,6 +19,7 @@ speed = 5
 isJump = False
 jumpCount = 10
 pygame.joystick.init()
+cnopk_on = False
 
 my_joystick = pygame.joystick.Joystick(0)
 my_joystick.init()
@@ -27,15 +28,36 @@ joysticks = []
 for i in range(0, pygame.joystick.get_count()):
 	joysticks.append(pygame.joystick.Joystick(i))
 	joysticks[-1].init()
-cnopk_on = False
+
 run = True
 pygame.draw.rect(win, (0, 0, 255), (x, int(y), width, height))
+keys = pygame.key.get_pressed()
+menu = True
+num = 1
+while  menu:
+	if keys[pygame.K_UP]:
+		num=1
+
+	if keys[pygame.K_DOWN]:
+		num=2
+
+	if num == 1:
+		pygame.draw.rect(win, (0, 255, 0), (200, 150, 100, 60))
+		pygame.draw.rect(win, (0, 0, 255), (200, 250, 100, 60))
+	if num == 2:
+		pygame.draw.rect(win, (0, 0, 255), (200, 150, 100, 60))
+		pygame.draw.rect(win, (0, 255, 0), (200, 250, 100, 60))
+
+
+	pygame.time.delay(10)
+	pygame.display.update()
+
 while  run:
 	pygame.time.delay(10)
 
-    while cnopk_on == False:
-		if pygame.MOUSEBUTTONDOWN
-			cnopk_on = True
+
+
+
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			run = False
@@ -55,7 +77,7 @@ while  run:
 		y += speed
 
 
-	keys = pygame.key.get_pressed()
+
 	if keys[pygame.K_LEFT] or my_joystick.get_hat(0) == (-1, 0) and x > 5:
 		x -= speed
 
