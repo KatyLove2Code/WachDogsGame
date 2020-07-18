@@ -23,18 +23,6 @@ pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_11.png"),
 pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_12.png"),
 pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_13.png")]
 
-playerStand = [pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_00.png"),
-pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_01.png"),
-pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_02.png"),
-pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_03.png"),
-pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_04.png"),
-pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_05.png"),
-pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_06.png"),
-pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_07.png"),
-pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_08.png"),
-pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_09.png"),
-pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_10.png")]
-
 bg = pygame.image.load('Tiles/bg/bg.png')
 
 
@@ -84,8 +72,8 @@ def drawWindow(): # рисование всей карты
 		win.blit(walk[animCount // 5], (x, y))
 		animCount += 1
 	else:
-		win.blit(playerStand[animCount // 5], (x, y))
-		animCount += 1
+		win.blit(walk[5], (x, y))
+		animCount = 0
 
 
 	pygame.display.update()
