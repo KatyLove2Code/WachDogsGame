@@ -57,7 +57,8 @@ animCount = 0
 
 
 
-def drawWindow(): # рисование всей карты
+
+def drawWindow(): # рисование всей карты 
 	global animCount
 
 	win.fill((0, 0, 0))
