@@ -8,22 +8,7 @@ win = pygame.display.set_mode((1024, 720))
 
 pygame.display.set_caption("Mario")
 
-walkRight = [pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_00.png"),
-pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_01.png"),
-pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_02.png"),
-pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_03.png"),
-pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_04.png"),
-pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_05.png"),
-pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_06.png"),
-pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_07.png"),
-pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_08.png"),
-pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_09.png"),
-pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_10.png"),
-pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_11.png"),
-pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_12.png"),
-pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_13.png")]
-
-walkLeft = [pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_00.png"),
+walk = [pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_00.png"),
 pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_01.png"),
 pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_02.png"),
 pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_03.png"),
@@ -52,14 +37,22 @@ pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_10.png")]
 
 bg = pygame.image.load('Tiles/bg/bg.jpg')
 
+
 clock = pygame.time.Clock()
 
 padOn = False
 keyboard = True
+<<<<<<< HEAD
 x = 50
 y = 425
 width = 600
 height = 600
+=======
+x = 5
+y = 5
+width = 65
+height = 65
+>>>>>>> a7da98b083d2cf7f7f8b1e0f57c8b161644d6e03
 speed = 5
 
 isJump = False
@@ -68,11 +61,11 @@ jumpCount1 = 10
 pygame.joystick.init()
 left = False
 right = False
-animCount = 0;
+animCount = 0
 
 
 
-def drawWindow():
+def drawWindow(): # рисование всей карты
 	global animCount
 
 	win.blit(bg, (0, 0))
@@ -81,10 +74,10 @@ def drawWindow():
 		animCount = 0
 	
 	if left:
-		win.blit(walkLeft[animCount // 5], (x, y))
+		win.blit(walk[animCount // 5], (x, y)) # анимация персонажа
 		animCount += 1
 	elif right:
-		win.blit(walkRight[animCount // 5], (x, y))
+		win.blit(walk[animCount // 5], (x, y))
 		animCount += 1
 	else:
 		win.blit(playerStand[animCount // 5], (x, y))
@@ -106,7 +99,7 @@ except:
 	padOn = False
 
 run = True
-while  run:
+while run:
 	clock.tick(60)
 
 	for event in pygame.event.get():
