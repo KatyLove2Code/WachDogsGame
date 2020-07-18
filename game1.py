@@ -53,13 +53,24 @@ jumpCount1 = 10
 pygame.joystick.init()
 left = False
 right = False
-animCount = 0
+animCount = 0;
 
 
+i = 0
+while i <= 9:
+	idleAnim = [pygame.transform.scale(playerStand[i], (185, 185))] # уменьшение размера анимации
+	i += 1
+
+g = 0
+while g <= 13:
+	walkAnim = [pygame.transform.scale(walk[g], (185, 185))] # уменьшение размера анимации
+	g += 1
 
 
-def drawWindow(): # рисование всей карты 
+def drawWindow(): # рисование всей карты
 	global animCount
+	global walkAnim
+	global idleAnim
 
 	win.fill((0, 0, 0))
 	
@@ -67,13 +78,13 @@ def drawWindow(): # рисование всей карты
 		animCount = 0
 	
 	if left:
-		win.blit(walk[animCount // 5], (x, y)) # анимация персонажа
+		win.blit(walkAnim[animCount // 5], (x, y)) # анимация персонажа
 		animCount += 1
 	elif right:
-		win.blit(walk[animCount // 5], (x, y))
+		win.blit(walkAnim[animCount // 5], (x, y))
 		animCount += 1
 	else:
-		win.blit(playerStand[animCount // 5], (x, y))
+		win.blit(idleAnim[animCount // 5], (x, y))
 		animCount += 1
 
 
