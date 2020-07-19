@@ -51,6 +51,9 @@ right = False
 animCount = 0
 
 i = 0
+while i <= 13:
+    runAnimation = [pygame.transform.scale(walk[i], (165, 165))]
+    i += 1
 
 
 def drawWindow():  # рисование всей карты
@@ -62,10 +65,10 @@ def drawWindow():  # рисование всей карты
         animCount = 0
 
     if left:
-        win.blit(walk[animCount // 5], (x, y))  # анимация персонажа
+        win.blit(runAnimation[animCount // 5], (x, y))  # анимация персонажа
         animCount += 1
     elif right:
-        win.blit(walk[animCount // 5], (x, y))
+        win.blit(runAnimation[animCount // 5], (x, y))
         animCount += 1
     else:
         win.blit(walk[5], (x, y))
