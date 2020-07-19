@@ -44,10 +44,7 @@ padOn = False
 keyboard = True
 
 
-x = 50
-y = 425
-width = 600
-height = 600
+
 
 x = 5
 y = 5
@@ -161,11 +158,11 @@ while run:
 
 	if keyboard == True:
 
-		if keys[pygame.K_a] and x > 5:
+		if keys[pygame.K_a] and x > 100:
 			x -= speed
 			left = True
 			right = False
-		elif keys[pygame.K_d] and x < 1024 - width - 5:
+		elif keys[pygame.K_d] and x < 1024 - width - 40:
 			x += speed
 			right = True
 			left = False
