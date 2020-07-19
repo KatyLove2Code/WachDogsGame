@@ -30,10 +30,15 @@ clock = pygame.time.Clock()
 padOn = False
 keyboard = True
 
+<<<<<<< HEAD
+
+
+=======
 x = 50
 y = 425
 width = 600
 height = 600
+>>>>>>> 17916d90c384510968f6a2a7d9edab218be28881
 
 x = 5
 y = 5
@@ -90,6 +95,99 @@ except:
 
 run = True
 while run:
+<<<<<<< HEAD
+	clock.tick(60)
+
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			run = False
+
+	keys = pygame.key.get_pressed()
+
+	#if keys[pygame.K_p] and padOn == False:
+		#padOn = True
+		#keyboard = False
+		#print("True")
+
+	if keys[pygame.K_o] and padOn == True:
+		padOn = False
+		keyboard = True
+		print("False")
+		isJump = False
+	if padOn == True:
+
+		#if my_joystick.get_hat(0) == (-1, -1) and x > 5 and y < 720 - height - 15:
+			#x -= speed
+			#y += speed
+		#if my_joystick.get_hat(0) == (1, 1) and x < 1024 - width - 5 and y > 5:
+			#x += speed
+			#y -= speed
+		#if my_joystick.get_hat(0) == (-1, 1) and x > 5 and y > 5:
+			#x -= speed
+			#y -= speed
+		#if my_joystick.get_hat(0) == (1, -1) and x < 1024 - width - 5 and y < 720 - height - 15:
+			#x += speed
+			#y += speed
+		if my_joystick.get_hat(0) == (-1, 0) and x > 5:
+			x -= speed
+		if my_joystick.get_hat(0) == (1, 0) and x < 1024 - width - 5:
+			x += speed
+		#if  my_joystick.get_hat(0) == (0, 1) and y > 5:
+			#y -= speed
+		#if my_joystick.get_hat(0) == (0, -1) and y < 720 - height - 15:
+			#y += speed
+		if event.type == pygame.JOYBUTTONDOWN:
+			if not(isJump):
+
+				if event.button == 0:
+					isJump = True
+			else:
+				if jumpCount1 >= - 10:
+					if jumpCount1 < 0:
+						y += (jumpCount1 ** 2) / 2
+					else:
+						y -= (jumpCount1 ** 2) / 2
+					jumpCount1 -= 1
+				else:
+					isJump = False
+					jumpCount1 = 10
+
+
+
+	if keyboard == True:
+
+		if keys[pygame.K_a] and x > 100:
+			x -= speed
+			left = True
+			right = False
+		elif keys[pygame.K_d] and x < 1024 - width - 40:
+			x += speed
+			right = True
+			left = False
+		else:
+			left = False
+			right = False
+			animCount = 0
+
+		if not(isJump):
+
+			if keys[pygame.K_SPACE]:
+				isJump = True
+		else:
+			if jumpCount >= - 10:
+				if jumpCount < 0:
+					y += (jumpCount ** 2) / 2
+				else:
+					y -= (jumpCount ** 2) / 2
+				jumpCount -= 1
+			else:
+				isJump = False
+				jumpCount = 10
+
+	drawWindow()
+
+
+=======
     clock.tick(60)
 
     for event in pygame.event.get():
@@ -177,5 +275,6 @@ while run:
                 jumpCount = 10
 
     drawWindow()
+>>>>>>> 17916d90c384510968f6a2a7d9edab218be28881
 
 pygame.quit()
