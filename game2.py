@@ -1,26 +1,28 @@
 #################################
 #ЕСЛИ ХОТИТЕ ЧТО-ТО ИЗМЕНИТЬ ПРЕДУПРЕДИТЕ МЕНЯ!!!!
 #################################
+
 import pygame
 pygame.init()
 width_win = 500
 height_win = 500#РАЗМЕР ОКНА ПИШИТЕ СЮДА
 win = pygame.display.set_mode((width_win, height_win))
 pygame.display.set_caption("Mario")
-
-
-
 x = 50
 y = 425
 width = 40
 height = 60
 speed = 5
-
+num = 1
+pervst = True
+vtst = False
+main_menu = True
+menuButton1x = 100
+menuButton1y = 60
 isJump = False
 jumpCount = 10
 pygame.joystick.init()
 cnopk_on = False
-
 my_joystick = pygame.joystick.Joystick(0)
 my_joystick.init()
 
@@ -30,77 +32,84 @@ for i in range(0, pygame.joystick.get_count()):
 	joysticks[-1].init()
 
 run = True
-
 keys = pygame.key.get_pressed()
-menu = True
-num = 1
-import pygame
-pygame.init()
-width_win = 500
-height_win = 500#РАЗМЕР ОКНА ПИШИТЕ СЮДА
-win = pygame.display.set_mode((width_win, height_win))
-pygame.display.set_caption("Mario")
+#первая кн#
+pygame.draw.rect(win, (0, 0, 255), ((width_win / 2-60), (height_win / 2 - 100), menuButton1x, menuButton1y))
+#2кн#
+pygame.draw.rect(win, (0, 0, 255), ((width_win / 2-60), (height_win / 2), menuButton1x, menuButton1y))
+#3кн#
+pygame.draw.rect(win, (0, 0, 255), ((width_win / 2-60), (height_win / 2 + 100), menuButton1x, menuButton1y))
 
+def menu_op(win):
+	menu_op1 = True
+	numOp = 1
 
+	while menu_op1:
+		event = pygame.event.get()
+		keys = pygame.key.get_pressed()
+		if keys[pygame.K_UP]:
+			numOp-=1
+		if keys[pygame.K_DOWN]:
+			numOp +=1
 
-x = 50
-y = 425
-width = 40
-height = 60
-speed = 5
-num = 1
-pervst = True
-opsin = False
-pygame.draw.rect(win, (0, 0, 255), (200, 150, 100, 60))
-pygame.draw.rect(win, (0, 0, 255), (200, 250, 100, 60))
-pygame.draw.rect(win, (0, 0, 255), (200, 350, 100, 60))
-while  menu:
+		if numOp == 3:
+			numOp = 2
+		elif numOp == 0:
+			numOp = 1
+
+		if numOp == 1:
+			pygame.draw.rect(win, (0, 255, 0), ((width_win / 2-60), (height_win / 2 - 100), menuButton1x, menuButton1y))
+			pygame.draw.rect(win, (0, 0, 255), (200, 250, 100, 60))
+		elif numOp == 2:
+			pygame.draw.rect(win, (0, 0, 255), ((width_win / 2-60), (height_win / 2 - 100), menuButton1x, menuButton1y))
+			pygame.draw.rect(win, (0, 255, 0), (200, 250, 100, 60))
+
+		pygame.time.delay(50)
+		pygame.display.update()
+
+while  main_menu:
 	event = pygame.event.get()
 	keys = pygame.key.get_pressed()
 
-	while pervst:
-		if keys[pygame.K_w]:
-			num-=1
-		if keys[pygame.K_s]:
-			num +=1
-		if num == 4:
-			num = 3
-		elif num == 0:
-			num = 1
+	if keys[pygame.K_UP]:
+		num-=1
+	if keys[pygame.K_DOWN]:
+		num +=1
 
+	if num == 4:
+		num = 3
+	elif num == 0:
+		num = 1
+
+	if num == 1:
+		pygame.draw.rect(win, (0, 255, 0), ((width_win / 2-60), (height_win / 2 - 100), menuButton1x, menuButton1y))
+		pygame.draw.rect(win, (0, 0, 255), (200, 250, 100, 60))
+		pygame.draw.rect(win, (0, 0, 255), (200, 350, 100, 60))
+	elif num == 2:
+		pygame.draw.rect(win, (0, 0, 255), ((width_win / 2-60), (height_win / 2 - 100), menuButton1x, menuButton1y))
+		pygame.draw.rect(win, (0, 255, 0), (200, 250, 100, 60))
+		pygame.draw.rect(win, (0, 0, 255), (200, 350, 100, 60))
+	elif num == 3:
+		pygame.draw.rect(win, (0, 0, 255), ((width_win / 2-60), (height_win / 2 - 100), menuButton1x, menuButton1y))
+		pygame.draw.rect(win, (0, 0, 255), (200, 250, 100, 60))
+		pygame.draw.rect(win, (0, 255, 0), (200, 350, 100, 60))
+	if keys[pygame.K_RIGHT]:
 		if num == 1:
-			pygame.draw.rect(win, (0, 255, 0), (200, 150, 100, 60))
-			pygame.draw.rect(win, (0, 0, 255), (200, 250, 100, 60))
-			pygame.draw.rect(win, (0, 0, 255), (200, 350, 100, 60))
+			main_menu = False
 		elif num == 2:
-			pygame.draw.rect(win, (0, 0, 255), (200, 150, 100, 60))
-			pygame.draw.rect(win, (0, 255, 0), (200, 250, 100, 60))
-			pygame.draw.rect(win, (0, 0, 255), (200, 350, 100, 60))
-		elif num == 3:
-			pygame.draw.rect(win, (0, 0, 255), (200, 150, 100, 60))
-			pygame.draw.rect(win, (0, 0, 255), (200, 250, 100, 60))
-			pygame.draw.rect(win, (0, 255, 0), (200, 350, 100, 60))
-
-
-		if keys[pygame.K_f]:
 			pygame.draw.rect(win, (0, 0, 0), (200, 150, 100, 60))
 			pygame.draw.rect(win, (0, 0, 0), (200, 250, 100, 60))
 			pygame.draw.rect(win, (0, 0, 0), (200, 350, 100, 60))
-			if num == 1:
-				menu = False
-			elif num == 2:
-				pervst = False
-				opsin = True
-			elif num == 3:
-				pygame.quit()
+			menu_op(win)
 
 
 	pygame.time.delay(50)
 	pygame.display.update()
+#конец кода меню
+
 isJump = False
 jumpCount = 10
 pygame.joystick.init()
-pygame.draw.rect(win, (0, 0, 255), (x, int(y), width, height))
 
 my_joystick = pygame.joystick.Joystick(0)
 my_joystick.init()
