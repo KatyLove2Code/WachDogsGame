@@ -50,14 +50,11 @@ left = False
 right = False
 animCount = 0
 
-<<<<<<< HEAD
 
-=======
 i = 0
 while i <= 13:
     runAnimation = [pygame.transform.scale(walk[i], (165, 165))]
     i += 1
->>>>>>> 9509d915b5571a29b37a1801aa6ad8e019bc1389
 
 
 def drawWindow():  # рисование всей карты
