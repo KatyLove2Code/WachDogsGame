@@ -3,7 +3,7 @@
 #################################
 import pygame
 from classHero import Hero
-
+from class_menu import main_menu
 ## выясняем размер экрана пользователя
 import ctypes
 user32 = ctypes.windll.user32
@@ -24,7 +24,11 @@ FPS = 60
 
 
 hero = Hero(USER_SCREEN_H) #Создаём персонажа по шаблону из класса
+main_menustart(win)
 
+def main_menustart(win):
+    self.win = win
+    main_menu(self.win)
 
 def drawWindow():  # рисование всей карты
     win.blit(bg, (0, 0))
