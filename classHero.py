@@ -53,23 +53,42 @@ class Hero(pygame.sprite.Sprite):
         self.grav = 0 #гравитация - скорость движения вниз
         self.onGrond = True #Стоит на земле
         self.isJump = False #прыгает или нет
-        #self.padOn = False #использовать джойстик
+        self.padOn = False #использовать джойстик
+        self.j_left = False
+        self.j_right = False
 
     def update(self):
         #ТУТ ТОЛЬКО ФИЗИКА И УПРАВЛЕНИЕ, АНИМАЦИЯ В ФУНКЦИЮ АНИМАЦИИ
         keys = pygame.key.get_pressed()
 
+        if padOn and self.padOn :
+            self.joystick()
+
+
         self.speedX = 0
-        if keys[pygame.K_a]  or my_joystick.get_hat(0) == (-1, 0):
+        if keys[pygame.K_a]  or self.j_left:
             if self.rect.left>0:
                 self.speedX = -SPEED
 
-        elif  keys[pygame.K_d]  or my_joystick.get_hat(0) == (1, 0):
+        elif  keys[pygame.K_d]  or self.j_right:
             self.speedX = SPEED
 
 
         self.rect.x+=self.speedX
         self.animation()
+
+    def joystick(self):
+        if my_joystick.get_hat(0) == (-1, 0):
+            self.j_left = True
+        else:
+            self.j_left = False
+
+
+        if  my_joystick.get_hat(0) == (1, 0):
+            self.j_right = True
+        else:
+            self.j_right = False
+
 
         #
         # if padOn == True:

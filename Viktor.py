@@ -33,8 +33,8 @@ pygame.draw.rect(win, (0, 0, 255), (x, int(y), width, height))
 while  run:
 	pygame.time.delay(10)
 
-    while cnopk_on == False:
-		if pygame.MOUSEBUTTONDOWN
+	while cnopk_on == False:
+		if pygame.MOUSEBUTTONDOWN:
 			cnopk_on = True
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
