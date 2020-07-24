@@ -17,11 +17,12 @@ BUTTON_H = 100
 class Button(pygame.sprite.Sprite):
 	def __init__(self, text, x, y, width = BUTTON_W, height = BUTTON_H ):
 		super().__init__()
-		self.text = fontImpact.render(text, 1, (0, 100, 0))
 		self.width = width
 		self.height = height
+		self.text = fontImpact.render(text, 1, (0, 100, 0))
+		self.textrect = self.text.get_rect(centerx = self.width//2, centery = self.height//2 )
 		self.image = pygame.Surface((self.width, self.height))
-		self.rect = self.image.get_rect(x = x, y = y)
+		self.rect = self.image.get_rect(centerx = USER_SCREEN_W//2, y = y)
 		self.active = False
 		self.activeColor = (0, 255, 0)
 		self.baseColor = (0, 0, 255)
@@ -32,10 +33,10 @@ class Button(pygame.sprite.Sprite):
 	def update(self, *args):
 		if self.active:
 			self.image.fill(self.activeColor)
-			self.image.blit(self.text, (0, 0))
+			self.image.blit(self.text, self.textrect)
 		else:
 			self.image.fill(self.baseColor)
-			self.image.blit(self.text, (0, 0))
+			self.image.blit(self.text, self.textrect)
 
 
 
