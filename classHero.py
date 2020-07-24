@@ -1,5 +1,7 @@
 import pygame
-
+import ctypes
+user32 = ctypes.windll.user32
+USER_SCREEN_W, USER_SCREEN_H = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 pygame.joystick.init()
 padOn = False
 try:
@@ -12,9 +14,6 @@ try:
     padOn = True
 except:
     print('Joystick not found')
-
-
-
 
 walk = [pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_00.png"),
         pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_01.png"),
@@ -53,7 +52,7 @@ class Hero(pygame.sprite.Sprite):
         self.grav = 0 #гравитация - скорость движения вниз
         self.onGrond = True #Стоит на земле
         self.isJump = False #прыгает или нет
-        self.padOn = False #использовать джойстик
+        self.padOn = True #использовать джойстик
         self.j_left = False
         self.j_right = False
 
@@ -71,7 +70,9 @@ class Hero(pygame.sprite.Sprite):
                 self.speedX = -SPEED
 
         elif  keys[pygame.K_d]  or self.j_right:
-            self.speedX = SPEED
+            if self.rect.right<USER_SCREEN_W:
+
+                self.speedX = SPEED
 
 
         self.rect.x+=self.speedX
