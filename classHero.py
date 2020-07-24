@@ -60,11 +60,11 @@ class Hero(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
 
         self.speedX = 0
-        if keys[pygame.K_a]  or keys[pygame.K_LEFT]  :
+        if keys[pygame.K_a]  or my_joystick.get_hat(0) == (-1, 0):
             if self.rect.left>0:
                 self.speedX = -SPEED
 
-        elif  keys[pygame.K_d]  or keys[pygame.K_RIGHT]:
+        elif  keys[pygame.K_d]  or my_joystick.get_hat(0) == (1, 0):
             self.speedX = SPEED
 
 
