@@ -9,6 +9,7 @@ import ctypes
 user32 = ctypes.windll.user32
 USER_SCREEN_W, USER_SCREEN_H = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 
+
 #настраиваем экран
 pygame.init()
 win = pygame.display.set_mode((USER_SCREEN_W, USER_SCREEN_H), pygame.FULLSCREEN)
