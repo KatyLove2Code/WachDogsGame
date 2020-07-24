@@ -1,9 +1,8 @@
-#################################
-# ЕСЛИ ХОТИТЕ ЧТО-ТО ИЗМЕНИТЬ ПРЕДУПРЕДИТЕ МЕНЯ!!!!
-#################################
+
 import pygame
 from classHero import Hero
 from class_menu import Menu
+
 ## выясняем размер экрана пользователя
 import ctypes
 
@@ -13,7 +12,7 @@ USER_SCREEN_W, USER_SCREEN_H = user32.GetSystemMetrics(0), user32.GetSystemMetri
 # настраиваем экран
 pygame.init()
 win = pygame.display.set_mode((USER_SCREEN_W, USER_SCREEN_H), pygame.FULLSCREEN)
-pygame.display.set_caption("Mario")
+pygame.display.set_caption("street defender")
 
 bg = pygame.image.load('Tiles/bg/bg.png')
 bg = pygame.transform.scale(bg, (USER_SCREEN_W, USER_SCREEN_H))
@@ -22,26 +21,25 @@ bg = pygame.transform.scale(bg, (USER_SCREEN_W, USER_SCREEN_H))
 clock = pygame.time.Clock()
 FPS = 60
 
-
-# def main_menustart(win):
-#     win = win
-#     main_menu(win)
-
-
-def drawWindow():  # рисование всей карты
-    win.blit(bg, (0, 0))
-    win.blit(hero.image, hero.rect)
-
-    pygame.display.update()
-
-
 hero = Hero(USER_SCREEN_H)  # Создаём персонажа по шаблону из класса
 
+#ФУНКЦИИ
 
-# main_menustart(win)
+def drawWindow():
+    """
+    функция занимается отрисовкой всех персонажей на карте
+    :return:
+    """
+    win.blit(bg, (0, 0)) # фон
+    win.blit(hero.image, hero.rect) #главный герой
+    pygame.display.update()  #обновление экрана
 
 
 def showMenu():
+    '''
+    стартовое меню
+    :return:
+    '''
     menu = Menu(win)
 
     while True:
@@ -58,9 +56,10 @@ def showMenu():
                      menu.up()
                  if event.key == pygame.K_DOWN:
                      menu.down()
-
         menu.update()
 
+
+#НАЧАЛО ПРОГРАММЫ
 
 showMenu()
 
@@ -76,13 +75,9 @@ while run:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 run = False
-        # if event.type == pygame.KEYDOWN:
-        #     if event.key == pygame.K_o and padOn == True:
-        #         padOn = False
-        #         keyboard = True
-        #         print("False")
-    hero.update()
 
-    drawWindow()
+    hero.update() #Обновляем героя
+
+    drawWindow() #обновляем экран
 
 pygame.quit()

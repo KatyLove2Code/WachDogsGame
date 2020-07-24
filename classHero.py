@@ -90,76 +90,6 @@ class Hero(pygame.sprite.Sprite):
             self.j_right = False
 
 
-        #
-        # if padOn == True:
-        #
-        # #if my_joystick.get_hat(0) == (-1, -1) and x > 5 and y < 720 - height - 15:
-        #     #x -= speed
-        #     #y += speed
-        # #if my_joystick.get_hat(0) == (1, 1) and x < 1024 - width - 5 and y > 5:
-        #     #x += speed
-        #     #y -= speed
-        # #if my_joystick.get_hat(0) == (-1, 1) and x > 5 and y > 5:
-        #     #x -= speed
-        #     #y -= speed
-        # #if my_joystick.get_hat(0) == (1, -1) and x < 1024 - width - 5 and y < 720 - height - 15:
-        #     #x += speed
-        #     #y += speed
-        # if my_joystick.get_hat(0) == (-1, 0) and x > 5:
-        #     x -= speed
-        # if my_joystick.get_hat(0) == (1, 0) and x < 1024 - width - 5:
-        #     x += speed
-        # #if  my_joystick.get_hat(0) == (0, 1) and y > 5:
-        #     #y -= speed
-        # #if my_joystick.get_hat(0) == (0, -1) and y < 720 - height - 15:
-        #     #y += speed
-        # if event.type == pygame.JOYBUTTONDOWN:
-        #     if not(isJump):
-        #
-        #         if event.button == 0:
-        #             isJump = True
-        #     else:
-        #         if jumpCount1 >= - 10:
-        #             if jumpCount1 < 0:
-        #                 y += (jumpCount1 ** 2) / 2
-        #             else:
-        #                 y -= (jumpCount1 ** 2) / 2
-        #             jumpCount1 -= 1
-        #         else:
-        #             isJump = False
-        #             jumpCount1 = 10
-        #
-
-
-    # if keyboard == True:
-    #
-    #     if keys[pygame.K_a] and x > 100:
-    #         x -= speed
-    #         left = True
-    #         right = False
-    #     elif keys[pygame.K_d] and x < 1024 - width - 40:
-    #         x += speed
-    #         right = True
-    #         left = False
-    #     else:
-    #         left = False
-    #         right = False
-    #         animCount = 0
-    #
-    #     if not(isJump):
-    #
-    #         if keys[pygame.K_SPACE]:
-    #             isJump = True
-    #     else:
-    #         if jumpCount >= - 10:
-    #             if jumpCount < 0:
-    #                 y += (jumpCount ** 2) / 2
-    #             else:
-    #                 y -= (jumpCount ** 2) / 2
-    #             jumpCount -= 1
-    #         else:
-    #             isJump = False
-    #             jumpCount = 10
 
 
     def animation(self):
@@ -172,15 +102,3 @@ class Hero(pygame.sprite.Sprite):
                 self.image = pygame.transform.flip(self.image, True, False)
 
 
- # if animCount + 1 >= 60:
- #        animCount = 0
- #
- #    if left:
- #        win.blit(runAnimation[animCount // 5], (x, y))  # анимация персонажа
- #        animCount += 1
- #    elif right:
- #        win.blit(runAnimation[animCount // 5], (x, y))
- #        animCount += 1
- #    else:
- #        win.blit(runAnimation[5], (x, y))
- #        animCount = 0

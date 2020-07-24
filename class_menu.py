@@ -3,9 +3,9 @@ import ctypes
 
 pygame.init()
 
-num = 1  # ???????
-main_menu = True  # ????
-cnopk_on = False  # ????????
+#ШРИФТЫ
+fontImpact = pygame.font.SysFont("Impact", 72)
+
 
 user32 = ctypes.windll.user32
 USER_SCREEN_W, USER_SCREEN_H = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
@@ -17,7 +17,7 @@ BUTTON_H = 100
 class Button(pygame.sprite.Sprite):
 	def __init__(self, text, x, y, width = BUTTON_W, height = BUTTON_H ):
 		super().__init__()
-		self.text = text
+		self.text = fontImpact.render(text, 1, (0, 100, 0))
 		self.width = width
 		self.height = height
 		self.image = pygame.Surface((self.width, self.height))
@@ -27,11 +27,15 @@ class Button(pygame.sprite.Sprite):
 		self.baseColor = (0, 0, 255)
 
 
+
+
 	def update(self, *args):
 		if self.active:
 			self.image.fill(self.activeColor)
+			self.image.blit(self.text, (0, 0))
 		else:
 			self.image.fill(self.baseColor)
+			self.image.blit(self.text, (0, 0))
 
 
 
@@ -41,8 +45,11 @@ class Menu():
 		self.win = win #Экран для отрисовки
 
 		self.activeButton = 0  # Бывшая переменная num, какая кнопка сейчас активна
-		self.buttons= [		Button("button1", 50, 50),
-							Button("button2", 50, 50+BUTTON_H +100),
+		self.buttons= [		Button("button1", 50, 50+(BUTTON_H +100)*0),
+							Button("button2", 50, 50+(BUTTON_H +100)*1),
+							Button("button3", 50, 50+(BUTTON_H +100)*2),
+							Button("button4", 50, 50+(BUTTON_H +100)*3),
+							Button("button5", 50, 50+(BUTTON_H +100)*4),
 						]
 
 
