@@ -62,6 +62,7 @@ class Hero(pygame.sprite.Sprite):
         self.animCount = 0
         self.image = runAnimation[self.animCount]
 
+
         self.rect = self.image.get_rect(x=5, bottom=screenH)
         self.speedX = 0
 
@@ -79,6 +80,11 @@ class Hero(pygame.sprite.Sprite):
         self.j_jump = False
 
     def update(self, platforms):
+        """
+        Функция запускается из главной программы постоянно(в цикле) 
+        :param platforms:
+        :return:
+        """
         # ТУТ ТОЛЬКО ФИЗИКА И УПРАВЛЕНИЕ, АНИМАЦИЯ В ФУНКЦИЮ АНИМАЦИИ
         keys = pygame.key.get_pressed()
 
@@ -125,8 +131,14 @@ class Hero(pygame.sprite.Sprite):
                 if self.speedY >0:
                     self.onGrond = True
                 self.speedY = 0
+        else:
+            self.onGrond = False
 
     def joystick(self):
+        """
+        Если подключен джойстик, проверяем его кнопки
+        :return:
+        """
         if my_joystick.get_hat(0) == (-1, 0):
             self.j_left = True
         else:
@@ -138,6 +150,10 @@ class Hero(pygame.sprite.Sprite):
             self.j_right = False
 
     def animation(self):
+        '''
+        ВСЯ АНИМАЦИЯ ПЕРСОНАЖА
+        :return:
+        '''
 
         if self.speedX != 0:  # Если скорость по Х не нулевая, значит я иду
             self.animCount += 1  # Счётчик подсчитывает, какую картинку по счёту я должен показать

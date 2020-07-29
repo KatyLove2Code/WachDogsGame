@@ -99,14 +99,14 @@ showMenu()
 
 run = True
 while run:
-    clock.tick(FPS)
+    clock.tick(FPS) #ограничиваем ФПС
 
     ### ВСЁ УПРАВЛЕНИЕ ПЕРСОНАЖЕМ ВНУТРИ КЛАССА ПЕРСОНАЖА! НЕ ЗДЕСЬ
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT: #Если нажали на крестикв углу (его не видно в фуллскрин)
             run = False
 
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYDOWN: #
             if event.key == pygame.K_ESCAPE:
                 run = False
 
