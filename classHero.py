@@ -80,6 +80,11 @@ class Hero(pygame.sprite.Sprite):
         self.j_jump = False
 
     def update(self, platforms):
+        """
+        Функция запускается из главной программы постоянно(в цикле) 
+        :param platforms:
+        :return:
+        """
         # ТУТ ТОЛЬКО ФИЗИКА И УПРАВЛЕНИЕ, АНИМАЦИЯ В ФУНКЦИЮ АНИМАЦИИ
         keys = pygame.key.get_pressed()
 
@@ -145,6 +150,10 @@ class Hero(pygame.sprite.Sprite):
             self.j_right = False
 
     def animation(self):
+        '''
+        ВСЯ АНИМАЦИЯ ПЕРСОНАЖА
+        :return:
+        '''
 
         if self.speedX != 0:  # Если скорость по Х не нулевая, значит я иду
             self.animCount += 1  # Счётчик подсчитывает, какую картинку по счёту я должен показать
