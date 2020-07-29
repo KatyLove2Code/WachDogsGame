@@ -62,6 +62,7 @@ class Hero(pygame.sprite.Sprite):
         self.animCount = 0
         self.image = runAnimation[self.animCount]
 
+
         self.rect = self.image.get_rect(x=5, bottom=screenH)
         self.speedX = 0
 
@@ -125,6 +126,8 @@ class Hero(pygame.sprite.Sprite):
                 if self.speedY >0:
                     self.onGrond = True
                 self.speedY = 0
+        else:
+            self.onGrond = False
 
     def joystick(self):
         if my_joystick.get_hat(0) == (-1, 0):
