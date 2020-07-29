@@ -21,15 +21,24 @@ walk = [pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_00.png"),
         pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_02.png"),
         pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_03.png"),
         pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_04.png"),
-        pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_05.png"),
         pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_06.png"),
         pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_07.png"),
-        pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_08.png"),
         pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_09.png"),
         pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_10.png"),
         pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_11.png"),
-        pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_12.png"),
         pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_13.png")]
+
+idle = [pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_00.png"),
+        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_01.png"),
+        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_02.png"),
+        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_03.png"),
+        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_04.png"),
+        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_05.png"),
+        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_06.png"),
+        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_07.png"),
+        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_08.png"),
+        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_09.png"),
+        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_10.png")]
 
 HERO_W = 165
 HERO_H = 165
@@ -39,6 +48,12 @@ JUMP = 15
 runAnimation = []
 for image in walk:
     runAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
+
+
+idleAnimation = []
+for image in idle:
+    idleAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
+
 
 
 class Hero(pygame.sprite.Sprite):
@@ -123,6 +138,7 @@ class Hero(pygame.sprite.Sprite):
             self.j_right = False
 
     def animation(self):
+
         if self.speedX != 0:  # Если скорость по Х не нулевая, значит я иду
             self.animCount += 1  # Счётчик подсчитывает, какую картинку по счёту я должен показать
             if self.animCount == len(runAnimation):  # если я дошёл до последней картинки в списке картинок
@@ -133,4 +149,11 @@ class Hero(pygame.sprite.Sprite):
                 self.image = pygame.transform.flip(self.image, True, False)  # то отзеркаливаю картинку персонажа
 
         else:  # иначе скорость = 0, значит стою на месте
-            pass
+            self.animCount += 1
+            if self.animCount == len(idleAnimation):
+                self.animCount = 0
+            self.image = idleAnimation[self.animCount]
+
+
+
+
