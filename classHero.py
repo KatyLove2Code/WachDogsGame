@@ -130,6 +130,10 @@ class Hero(pygame.sprite.Sprite):
             self.onGrond = False
 
     def joystick(self):
+        """
+        Если подключен джойстик, проверяем его кнопки
+        :return:
+        """
         if my_joystick.get_hat(0) == (-1, 0):
             self.j_left = True
         else:
