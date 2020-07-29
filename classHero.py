@@ -81,7 +81,7 @@ class Hero(pygame.sprite.Sprite):
 
     def update(self, platforms):
         """
-        Функция запускается из главной программы постоянно(в цикле) 
+        Функция запускается из главной программы постоянно(в цикле)
         :param platforms:
         :return:
         """
