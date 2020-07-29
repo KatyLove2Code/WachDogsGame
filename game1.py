@@ -24,8 +24,6 @@ clock = pygame.time.Clock()
 FPS = 60
 
 
-map = map.splitlines()
-
 hero = Hero(USER_SCREEN_H) #Создаём персонажа по шаблону из класса
 
 
