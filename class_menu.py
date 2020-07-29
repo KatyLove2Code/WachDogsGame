@@ -41,18 +41,19 @@ class Button(pygame.sprite.Sprite):
 
 
 
+
 class Menu():
 	def __init__(self, win):
 		self.win = win #Экран для отрисовки
 
 		self.activeButton = 0  # Бывшая переменная num, какая кнопка сейчас активна
-		self.buttons= [		Button("button1", 50, 50+(BUTTON_H +100)*0),
+		self.buttons= [		Button("START GAME", 50, 50+(BUTTON_H +100)*0),
 							Button("button2", 50, 50+(BUTTON_H +100)*1),
 							Button("button3", 50, 50+(BUTTON_H +100)*2),
 							Button("button4", 50, 50+(BUTTON_H +100)*3),
 							Button("button5", 50, 50+(BUTTON_H +100)*4),
 						]
-
+		self.buttons[self.activeButton].active = True
 
 	def update(self):
 		self.win.fill((56,67,128))
