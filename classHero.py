@@ -53,94 +53,43 @@ class Hero(pygame.sprite.Sprite):
         self.grav = 0 #гравитация - скорость движения вниз
         self.onGrond = True #Стоит на земле
         self.isJump = False #прыгает или нет
-        #self.padOn = False #использовать джойстик
+        self.padOn = False #использовать джойстик
+        self.j_left = False
+        self.j_right = False
 
     def update(self):
         #ТУТ ТОЛЬКО ФИЗИКА И УПРАВЛЕНИЕ, АНИМАЦИЯ В ФУНКЦИЮ АНИМАЦИИ
         keys = pygame.key.get_pressed()
 
+        if padOn and self.padOn :
+            self.joystick()
+
+
         self.speedX = 0
-        if keys[pygame.K_a]  or keys[pygame.K_LEFT]  :
+        if keys[pygame.K_a]  or self.j_left:
             if self.rect.left>0:
                 self.speedX = -SPEED
 
-        elif  keys[pygame.K_d]  or keys[pygame.K_RIGHT]:
+        elif  keys[pygame.K_d]  or self.j_right:
             self.speedX = SPEED
 
 
         self.rect.x+=self.speedX
         self.animation()
 
-        #
-        # if padOn == True:
-        #
-        # #if my_joystick.get_hat(0) == (-1, -1) and x > 5 and y < 720 - height - 15:
-        #     #x -= speed
-        #     #y += speed
-        # #if my_joystick.get_hat(0) == (1, 1) and x < 1024 - width - 5 and y > 5:
-        #     #x += speed
-        #     #y -= speed
-        # #if my_joystick.get_hat(0) == (-1, 1) and x > 5 and y > 5:
-        #     #x -= speed
-        #     #y -= speed
-        # #if my_joystick.get_hat(0) == (1, -1) and x < 1024 - width - 5 and y < 720 - height - 15:
-        #     #x += speed
-        #     #y += speed
-        # if my_joystick.get_hat(0) == (-1, 0) and x > 5:
-        #     x -= speed
-        # if my_joystick.get_hat(0) == (1, 0) and x < 1024 - width - 5:
-        #     x += speed
-        # #if  my_joystick.get_hat(0) == (0, 1) and y > 5:
-        #     #y -= speed
-        # #if my_joystick.get_hat(0) == (0, -1) and y < 720 - height - 15:
-        #     #y += speed
-        # if event.type == pygame.JOYBUTTONDOWN:
-        #     if not(isJump):
-        #
-        #         if event.button == 0:
-        #             isJump = True
-        #     else:
-        #         if jumpCount1 >= - 10:
-        #             if jumpCount1 < 0:
-        #                 y += (jumpCount1 ** 2) / 2
-        #             else:
-        #                 y -= (jumpCount1 ** 2) / 2
-        #             jumpCount1 -= 1
-        #         else:
-        #             isJump = False
-        #             jumpCount1 = 10
-        #
+    def joystick(self):
+        if my_joystick.get_hat(0) == (-1, 0):
+            self.j_left = True
+        else:
+            self.j_left = False
 
 
-    # if keyboard == True:
-    #
-    #     if keys[pygame.K_a] and x > 100:
-    #         x -= speed
-    #         left = True
-    #         right = False
-    #     elif keys[pygame.K_d] and x < 1024 - width - 40:
-    #         x += speed
-    #         right = True
-    #         left = False
-    #     else:
-    #         left = False
-    #         right = False
-    #         animCount = 0
-    #
-    #     if not(isJump):
-    #
-    #         if keys[pygame.K_SPACE]:
-    #             isJump = True
-    #     else:
-    #         if jumpCount >= - 10:
-    #             if jumpCount < 0:
-    #                 y += (jumpCount ** 2) / 2
-    #             else:
-    #                 y -= (jumpCount ** 2) / 2
-    #             jumpCount -= 1
-    #         else:
-    #             isJump = False
-    #             jumpCount = 10
+        if  my_joystick.get_hat(0) == (1, 0):
+            self.j_right = True
+        else:
+            self.j_right = False
+
+
 
 
     def animation(self):
@@ -153,15 +102,3 @@ class Hero(pygame.sprite.Sprite):
                 self.image = pygame.transform.flip(self.image, True, False)
 
 
- # if animCount + 1 >= 60:
- #        animCount = 0
- #
- #    if left:
- #        win.blit(runAnimation[animCount // 5], (x, y))  # анимация персонажа
- #        animCount += 1
- #    elif right:
- #        win.blit(runAnimation[animCount // 5], (x, y))
- #        animCount += 1
- #    else:
- #        win.blit(runAnimation[5], (x, y))
- #        animCount = 0
