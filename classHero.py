@@ -49,41 +49,22 @@ runAnimation = []
 for image in walk:
     runAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
 
-
 idleAnimation = []
 for image in idle:
     idleAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
 
 
-
 class Hero(pygame.sprite.Sprite):
-<<<<<<< HEAD
-    def __init__(self, screenH,):
-        super().__init__()
-        self.animCount = 0
-        self.image = runAnimation[self.animCount]
-
-        self.rect = self.image.get_rect(x = 5, bottom = screenH)
-        self.rect = self.image.get_rect(y = 5, bottom = screenH)
-=======
     def __init__(self, groups, screenH):
         super().__init__(groups)
         self.animCount = 0
         self.image = runAnimation[self.animCount]
 
-
         self.rect = self.image.get_rect(x=5, bottom=screenH)
->>>>>>> 674ac613bb6660dc4ea29d86bb26d0e880bf8f32
         self.speedX = 0
 
         # Движение по Y
         self.speedY = 0
-<<<<<<< HEAD
-        self.grav = 0 #гравитация - скорость движения вниз
-        self.onGrond = False #Стоит на земле
-        self.isJump = True #прыгает или нет
-        self.padOn = True #использовать джойстик
-=======
         self.grav = 1  # гравитация - скорость движения вниз
         self.onGrond = True  # Стоит на земле
         self.isJump = False  # прыгает или нет
@@ -91,7 +72,6 @@ class Hero(pygame.sprite.Sprite):
 
         # Джойстик
         self.padOn = True  # использовать джойстик
->>>>>>> 674ac613bb6660dc4ea29d86bb26d0e880bf8f32
         self.j_left = False
         self.j_right = False
         self.j_jump = False
@@ -108,25 +88,15 @@ class Hero(pygame.sprite.Sprite):
         if padOn and self.padOn:
             self.joystick()
 
-<<<<<<< HEAD
-        self.speedY = 0
-=======
->>>>>>> 674ac613bb6660dc4ea29d86bb26d0e880bf8f32
         self.speedX = 0
         if keys[pygame.K_a] or self.j_left:
             if self.rect.left > 0:
                 self.speedX = -SPEED
 
-<<<<<<< HEAD
-        elif  keys[pygame.K_d] or self.j_right:
-            if self.rect.right < USER_SCREEN_W:
-
-=======
         elif keys[pygame.K_d] or self.j_right:
             if self.rect.right < USER_SCREEN_W:
->>>>>>> 674ac613bb6660dc4ea29d86bb26d0e880bf8f32
                 self.speedX = SPEED
-        self.rect.x += self.speedX
+
 
         if keys[pygame.K_SPACE] and self.onGrond:
             self.speedY -= JUMP
@@ -135,16 +105,6 @@ class Hero(pygame.sprite.Sprite):
         self.rect.x += self.speedX
         self.rect.y += self.speedY
 
-<<<<<<< HEAD
-        self.animation()
-
-
-
-
-
-
-    def joystick(self): #управление с геймпада
-=======
         if not self.onGrond:
             self.speedY += self.grav
 
@@ -152,7 +112,6 @@ class Hero(pygame.sprite.Sprite):
             self.rect.bottom = self.GROUND
             self.onGrond = True
             self.speedY = 0
-
 
         self.check_collizion(platforms)
         self.animation()
@@ -163,10 +122,10 @@ class Hero(pygame.sprite.Sprite):
         :return:
         """
         if pygame.sprite.spritecollideany(self, platforms):
-            if self.speedX !=0:
+            if self.speedX != 0:
                 self.speedX = 0
-            if self.speedY !=0:
-                if self.speedY >0:
+            if self.speedY != 0:
+                if self.speedY > 0:
                     self.onGrond = True
                 self.speedY = 0
         else:
@@ -177,7 +136,6 @@ class Hero(pygame.sprite.Sprite):
         Если подключен джойстик, проверяем его кнопки
         :return:
         """
->>>>>>> 674ac613bb6660dc4ea29d86bb26d0e880bf8f32
         if my_joystick.get_hat(0) == (-1, 0):
             self.j_left = True
         else:
@@ -208,7 +166,3 @@ class Hero(pygame.sprite.Sprite):
             if self.animCount == len(idleAnimation):
                 self.animCount = 0
             self.image = idleAnimation[self.animCount]
-
-
-
-
