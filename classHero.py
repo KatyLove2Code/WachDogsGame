@@ -43,9 +43,7 @@ idle = [pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_00.png"
 HERO_W = 165
 HERO_H = 165
 SPEED = 10
-JUMP = 20
-
-
+JUMP = 15
 
 runAnimation = []
 for image in walk:
@@ -78,10 +76,6 @@ class Hero(pygame.sprite.Sprite):
         self.j_right = False
         self.j_jump = False
 
-
-        self.idleLeft = True
-        self.idleRight = False
-
     def update(self, platforms):
         """
         Функция запускается из главной программы постоянно(в цикле)
@@ -96,16 +90,10 @@ class Hero(pygame.sprite.Sprite):
 
         self.speedX = 0
         if keys[pygame.K_a] or self.j_left:
-            self.idleLeft = True
-            self.idleRight = False
             if self.rect.left > 0:
                 self.speedX = -SPEED
 
-
-
         elif keys[pygame.K_d] or self.j_right:
-            self.idleLeft = False
-            self.idleRight = True
             if self.rect.right < USER_SCREEN_W:
                 self.speedX = SPEED
 
@@ -134,25 +122,20 @@ class Hero(pygame.sprite.Sprite):
         :return:
         """
         if pygame.sprite.spritecollideany(self, platforms):
-
+            if self.speedX != 0:
+                self.speedX = 0
             if self.speedY != 0:
                 if self.speedY > 0:
                     self.onGrond = True
                 self.speedY = 0
         else:
-            self.speedY += self.grav
+            self.onGrond = False
 
     def joystick(self):
         """
         Если подключен джойстик, проверяем его кнопки
         :return:
         """
-        if my_joystick.get_button(0) == 1 and self.onGrond:
-            self.speedY -= JUMP
-            self.onGrond = False
-
-
-
         if my_joystick.get_hat(0) == (-1, 0):
             self.j_left = True
         else:
@@ -182,12 +165,4 @@ class Hero(pygame.sprite.Sprite):
             self.animCount += 1
             if self.animCount == len(idleAnimation):
                 self.animCount = 0
-
             self.image = idleAnimation[self.animCount]
-
-            if self.idleRight == True and self.idleLeft == False:
-                self.image = pygame.transform.flip(self.image, True, False)
-
-
-
-
