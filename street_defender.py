@@ -3,6 +3,7 @@ from classHero import Hero
 from class_menu import Menu
 from level import level
 from classPlatform import Platform
+from classEnemy import Enemy
 
 ## выясняем размер экрана пользователя
 import ctypes

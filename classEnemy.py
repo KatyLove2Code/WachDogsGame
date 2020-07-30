@@ -1,8 +1,6 @@
 import pygame
 import ctypes
 
-user32 = ctypes.windll.user32
-USER_SCREEN_W, USER_SCREEN_H = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 pygame.joystick.init()
 padOn = False
 try:
@@ -16,47 +14,33 @@ try:
 except:
     print('Joystick not found')
 
-walk = [pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_00.png"),
-        pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_01.png"),
-        pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_02.png"),
-        pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_03.png"),
-        pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_04.png"),
-        pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_06.png"),
-        pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_07.png"),
-        pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_09.png"),
-        pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_10.png"),
-        pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_11.png"),
-        pygame.image.load("Tiles/Character/Animations/Run/Armature_Run_13.png")]
+user32 = ctypes.windll.user32
+USER_SCREEN_W, USER_SCREEN_H = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+pygame.joystick.init()
+padOn = False
 
-idle = [pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_00.png"),
-        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_01.png"),
-        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_02.png"),
-        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_03.png"),
-        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_04.png"),
-        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_05.png"),
-        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_06.png"),
-        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_07.png"),
-        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_08.png"),
-        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_09.png"),
-        pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_10.png")]
+walk = [pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_00.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_01.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_02.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_03.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_04.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_05.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_06.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_07.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_08.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_09.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_10.png")]
 
-HERO_W = 165
-HERO_H = 165
+ENEMY_W = 165
+ENEMY_H = 165
 SPEED = 10
 JUMP = 20
 
-
-
 runAnimation = []
 for image in walk:
-    runAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
+    runAnimation.append(pygame.transform.scale(image, (ENEMY_W, ENEMY_H)))
 
-idleAnimation = []
-for image in idle:
-    idleAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
-
-
-class Hero(pygame.sprite.Sprite):
+class Enemy(pygame.sprite.Sprite):
     def __init__(self, groups, screenH):
         super().__init__(groups)
         self.animCount = 0
@@ -72,15 +56,11 @@ class Hero(pygame.sprite.Sprite):
         self.isJump = False  # прыгает или нет
         self.GROUND = screenH
 
-        # Джойстик
+         # Джойстик
         self.padOn = True  # использовать джойстик
         self.j_left = False
         self.j_right = False
         self.j_jump = False
-
-
-        self.idleLeft = True
-        self.idleRight = False
 
     def update(self, platforms):
         """
@@ -95,7 +75,7 @@ class Hero(pygame.sprite.Sprite):
             self.joystick()
 
         self.speedX = 0
-        if keys[pygame.K_a] or self.j_left:
+        if self.j_left:
             self.idleLeft = True
             self.idleRight = False
             if self.rect.left > 0:
@@ -103,7 +83,7 @@ class Hero(pygame.sprite.Sprite):
 
 
 
-        elif keys[pygame.K_d] or self.j_right:
+        elif self.j_right:
             self.idleLeft = False
             self.idleRight = True
             if self.rect.right < USER_SCREEN_W:
@@ -177,17 +157,5 @@ class Hero(pygame.sprite.Sprite):
             self.image = runAnimation[self.animCount]  # Достаю картинку с нужным номером из списка
             if self.speedX > 0:  # Если двигаюсь вправо,
                 self.image = pygame.transform.flip(self.image, True, False)  # то отзеркаливаю картинку персонажа
-
-        else:  # иначе скорость = 0, значит стою на месте
-            self.animCount += 1
-            if self.animCount == len(idleAnimation):
-                self.animCount = 0
-
-            self.image = idleAnimation[self.animCount]
-
-            if self.idleRight == True and self.idleLeft == False:
-                self.image = pygame.transform.flip(self.image, True, False)
-
-
 
 
