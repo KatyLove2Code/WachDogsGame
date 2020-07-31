@@ -3,7 +3,6 @@ from classHero import Hero
 from class_menu import Menu
 from level import level
 from classPlatform import Platform
-from classEnemy import Enemy
 
 ## выясняем размер экрана пользователя
 import ctypes
@@ -69,6 +68,8 @@ def showMenu():
                 if event.key == 13:
                     if menu.activeButton == 0:  # Если выбрано "START GAME"
                         return
+                    elif menu.activeButton == 2:
+                        pygame.quit()
 
         menu.update()
 
