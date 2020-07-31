@@ -80,7 +80,7 @@ class Hero(pygame.sprite.Sprite):
 
 
         self.idleLeft = True
-        self.idleRight = False
+        # self.idleRight = False
 
     def update(self, platforms):
         """
@@ -97,7 +97,7 @@ class Hero(pygame.sprite.Sprite):
         self.speedX = 0
         if keys[pygame.K_a] or self.j_left:
             self.idleLeft = True
-            self.idleRight = False
+            # self.idleRight = False
             if self.rect.left > 0:
                 self.speedX = -SPEED
 
@@ -105,7 +105,7 @@ class Hero(pygame.sprite.Sprite):
 
         elif keys[pygame.K_d] or self.j_right:
             self.idleLeft = False
-            self.idleRight = True
+            # self.idleRight = True
             if self.rect.right < USER_SCREEN_W:
                 self.speedX = SPEED
 
@@ -185,7 +185,7 @@ class Hero(pygame.sprite.Sprite):
 
             self.image = idleAnimation[self.animCount]
 
-            if self.idleRight == True and self.idleLeft == False:
+            if self.idleLeft == False:
                 self.image = pygame.transform.flip(self.image, True, False)
 
 
