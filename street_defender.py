@@ -78,14 +78,15 @@ def showMenu():
 
 GRASS = pygame.image.load("Tiles/Map/untitled - 2020-07-17T205325.481.png")  # трава
 
+GRASS_sprite = pygame.transform.scale(GRASS, (65, 65))
+
 
 def draw_level():
     """
     Отрисовываем статичный фон (цветочки, деревья, облака, вот это всё)
     :return:
     """
-    #bg.blit(GRASS, GRASS.get_rect(right=80, bottom=1060))
-    #bg.blit(GRASS, GRASS.get_rect(x=80, y=1000))
+    bg.blit(GRASS_sprite, GRASS_sprite.get_rect(x=80, y=1000))
 
 
 def create_platforms():

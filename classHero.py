@@ -187,6 +187,3 @@ class Hero(pygame.sprite.Sprite):
             if self.idleLeft == False:
                 self.image = pygame.transform.flip(self.image, True, False)
 
-
-
-
