@@ -28,8 +28,8 @@ class Enemy(pygame.sprite.Sprite):
         self.animCount = 0
         self.image = runAnimation[self.animCount]
 
-        self.rect = self.image.get_rect(x=x, y=y)
-        self.speedX = 0
+        self.rect = self.image.get_rect(x=x, bottom = y+height)
+        self.speedX = 1
 
         # Движение по Y
         # self.speedY = 0
@@ -44,7 +44,7 @@ class Enemy(pygame.sprite.Sprite):
         # self.j_right = False
         # self.j_jump = False
 
-    def update(self, platforms):
+    def update(self):
         """
         Функция запускается из главной программы постоянно(в цикле)
         :param platforms:

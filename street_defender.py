@@ -83,13 +83,13 @@ def draw_level():
     Отрисовываем статичный фон (цветочки, деревья, облака, вот это всё)
     :return:
     """
-    bg.blit(GRASS, GRASS.get_rect(left = USER_SCREEN_W, bottom=USER_SCREEN_H )) #Прижимаем траву к правому нижнему углу
-
+    bg.blit(GRASS, GRASS.get_rect(right = USER_SCREEN_W, bottom=USER_SCREEN_H-100 )) #Прижимаем траву к правому нижнему углу
+    bg.blit(GRASS, GRASS.get_rect(x = 50, y = 100 ))
 
 
 def create_platforms():
     """
-    Отрисовка платформ по схеме уровня из файла level
+    Создание спрайтов
     :return:
     """
     platformSizeX = USER_SCREEN_W // len(level[0])
@@ -133,6 +133,7 @@ while run:
                 run = False
 
     hero.update(platform_group)  # Обновляем героя
+    enemy_group.update()
     # all_sprites_group.update()
     drawWindow()  # обновляем экран
 

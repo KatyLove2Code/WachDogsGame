@@ -95,22 +95,21 @@ class Hero(pygame.sprite.Sprite):
             self.joystick()
 
         self.speedX = 0
-        if keys[pygame.K_a] or self.j_left:
+        if keys[pygame.K_a] or self.j_left: #ЛЕВО
             self.idleLeft = True
             # self.idleRight = False
             if self.rect.left > 0:
                 self.speedX = -SPEED
 
 
-
-        elif keys[pygame.K_d] or self.j_right:
+        elif keys[pygame.K_d] or self.j_right: #ПРАВО
             self.idleLeft = False
             # self.idleRight = True
             if self.rect.right < USER_SCREEN_W:
                 self.speedX = SPEED
 
 
-        if keys[pygame.K_SPACE] and self.onGrond:
+        if keys[pygame.K_SPACE] and self.onGrond: #ПРЫЖОК
             self.speedY -= JUMP
             self.onGrond = False
 
@@ -140,7 +139,7 @@ class Hero(pygame.sprite.Sprite):
                     self.onGrond = True
                 self.speedY = 0
         else:
-            self.speedY += self.grav
+            self.onGrond = False
 
     def joystick(self):
         """
