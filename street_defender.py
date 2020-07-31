@@ -3,6 +3,7 @@ from classHero import Hero
 from class_menu import Menu
 from level import level
 from classPlatform import Platform
+from classEnemy import Enemy
 
 ## выясняем размер экрана пользователя
 import ctypes
@@ -25,6 +26,7 @@ FPS = 60
 # Группы
 all_sprites_group = pygame.sprite.Group()  # Группа вообще всех игровы объектов
 platform_group = pygame.sprite.Group()  # Группа платформ
+enemy_group = pygame.sprite.Group()  # Группа врагов
 
 hero = Hero(all_sprites_group, USER_SCREEN_H)  # Создаём персонажа по шаблону из класса
 
@@ -37,8 +39,8 @@ def drawWindow():
     :return:
     """
     win.blit(bg, (0, 0))  # фон
-    draw_level()
     platform_group.draw(win)  # Отрисвываем платформы
+    enemy_group.draw(win)
     win.blit(hero.image, hero.rect)  # главный герой
     pygame.display.update()  # обновление экрана
 
@@ -73,8 +75,19 @@ def showMenu():
 
         menu.update()
 
+GRASS = pygame.image.load("Tiles/Map/untitled - 2020-07-17T205325.481.png") #трава
+
 
 def draw_level():
+    """
+    Отрисовываем статичный фон (цветочки, деревья, облака, вот это всё)
+    :return:
+    """
+    bg.blit(GRASS, GRASS.get_rect(left = USER_SCREEN_W, bottom=USER_SCREEN_H )) #Прижимаем траву к правому нижнему углу
+
+
+
+def create_platforms():
     """
     Отрисовка платформ по схеме уровня из файла level
     :return:
@@ -87,8 +100,13 @@ def draw_level():
 
     for line in level:
         for b in line:
-            if b == 1:
+            if b == "H":
+                hero.rect.x = x
+                hero.rect.y = y
+            elif b == 1:
                 Platform((all_sprites_group, platform_group), x, y, platformSizeX, platformSizeY)
+            elif b == 2:
+                Enemy((all_sprites_group, enemy_group), x, y, platformSizeX, platformSizeY)
 
             x += platformSizeX
         x = 0
@@ -98,6 +116,8 @@ def draw_level():
 # НАЧАЛО ПРОГРАММЫ
 
 showMenu()
+create_platforms()
+draw_level()
 
 run = True
 while run:

@@ -1,23 +1,5 @@
 import pygame
-import ctypes
 
-# pygame.joystick.init()
-# padOn = False
-# try:
-#     my_joystick = pygame.joystick.Joystick(0)
-#     my_joystick.init()
-#     joysticks = []
-#     for i in range(pygame.joystick.get_count()):
-#         joysticks.append(pygame.joystick.Joystick(i))
-#         joysticks[-1].init()
-#     padOn = True
-# except:
-#     print('Joystick not found')
-#
-# user32 = ctypes.windll.user32
-# USER_SCREEN_W, USER_SCREEN_H = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-# pygame.joystick.init()
-# padOn = False
 
 walk = [pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_00.png"),
         pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_01.png"),
@@ -41,20 +23,20 @@ for image in walk:
     runAnimation.append(pygame.transform.scale(image, (ENEMY_W, ENEMY_H)))
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, groups, screenH):
+    def __init__(self, groups, x, y, width, height):
         super().__init__(groups)
         self.animCount = 0
         self.image = runAnimation[self.animCount]
 
-        self.rect = self.image.get_rect(x=5, bottom=screenH)
+        self.rect = self.image.get_rect(x=x, y=y)
         self.speedX = 0
 
         # Движение по Y
-        self.speedY = 0
-        self.grav = 1  # гравитация - скорость движения вниз
-        self.onGrond = True  # Стоит на земле
-        self.isJump = False  # прыгает или нет
-        self.GROUND = screenH
+        # self.speedY = 0
+        # self.grav = 1  # гравитация - скорость движения вниз
+        # self.onGrond = True  # Стоит на земле
+        # self.isJump = False  # прыгает или нет
+        # self.GROUND = screenH
 
         #  # Джойстик
         # self.padOn = True  # использовать джойстик
@@ -122,26 +104,7 @@ class Enemy(pygame.sprite.Sprite):
         else:
             self.speedY += self.grav
 
-    # def joystick(self):
-    #     """
-    #     Если подключен джойстик, проверяем его кнопки
-    #     :return:
-    #     """
-    #     if my_joystick.get_button(0) == 1 and self.onGrond:
-    #         self.speedY -= JUMP
-    #         self.onGrond = False
-    #
-    #
-    #
-    #     if my_joystick.get_hat(0) == (-1, 0):
-    #         self.j_left = True
-    #     else:
-    #         self.j_left = False
-    #
-    #     if my_joystick.get_hat(0) == (1, 0):
-    #         self.j_right = True
-    #     else:
-    #         self.j_right = False
+
 
     def animation(self):
         '''
