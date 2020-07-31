@@ -75,7 +75,8 @@ def showMenu():
 
         menu.update()
 
-GRASS = pygame.image.load("Tiles/Map/untitled - 2020-07-17T205325.481.png") #трава
+
+GRASS = pygame.image.load("Tiles/Map/untitled - 2020-07-17T205325.481.png")  # трава
 
 
 def draw_level():
@@ -83,8 +84,8 @@ def draw_level():
     Отрисовываем статичный фон (цветочки, деревья, облака, вот это всё)
     :return:
     """
-    bg.blit(GRASS, GRASS.get_rect(right = USER_SCREEN_W, bottom=USER_SCREEN_H-100 )) #Прижимаем траву к правому нижнему углу
-    bg.blit(GRASS, GRASS.get_rect(x = 50, y = 100 ))
+    #bg.blit(GRASS, GRASS.get_rect(right=80, bottom=1060))
+    #bg.blit(GRASS, GRASS.get_rect(x=80, y=1000))
 
 
 def create_platforms():
@@ -121,14 +122,14 @@ draw_level()
 
 run = True
 while run:
-    clock.tick(FPS) #ограничиваем ФПС
+    clock.tick(FPS)  # ограничиваем ФПС
 
     ### ВСЁ УПРАВЛЕНИЕ ПЕРСОНАЖЕМ ВНУТРИ КЛАССА ПЕРСОНАЖА! НЕ ЗДЕСЬ
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: #Если нажали на крестикв углу (его не видно в фуллскрин)
+        if event.type == pygame.QUIT:  # Если нажали на крестикв углу (его не видно в фуллскрин)
             run = False
 
-        if event.type == pygame.KEYDOWN: #
+        if event.type == pygame.KEYDOWN:  #
             if event.key == pygame.K_ESCAPE:
                 run = False
 
