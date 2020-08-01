@@ -67,7 +67,7 @@ class Hero(pygame.sprite.Sprite):
 
         # Движение по Y
         self.speedY = 0
-        self.grav = 1  # гравитация - скорость движения вниз
+        self.grav = 2  # гравитация - скорость движения вниз
         self.onGrond = True  # Стоит на земле
         self.isJump = False  # прыгает или нет
         self.GROUND = screenH
