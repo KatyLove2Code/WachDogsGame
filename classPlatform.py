@@ -1,7 +1,7 @@
 import pygame
 
 
-platform_image = pygame.image.load("Tiles/Map/untitled - 2020-07-17T194420.497.png")
+platform_image = pygame.image.load("Tiles/Map/untitled - 2020-08-01T144248.637.png")
 
 class Platform(pygame.sprite.Sprite):
     def __init__(self, groups, x, y, w, h):
