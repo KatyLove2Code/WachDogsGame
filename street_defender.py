@@ -86,15 +86,15 @@ TREE4 = pygame.image.load("Tiles/Map/untitled - 2020-07-17T194842.678.png")  # �
 FLOWER1 = pygame.image.load("Tiles/Map/untitled - 2020-07-17T200113.601.png")  # цветок№1
 FLOWER2 = pygame.image.load("Tiles/Map/untitled - 2020-07-17T200151.579.png")  # цветок№2
 
-GRASS_sprite = pygame.transform.scale(GRASS, (650, 650))
+GRASS_sprite = pygame.transform.scale(GRASS, (650, 650))  # уменьшение размера травы
 
-TREE1_sprite = pygame.transform.scale(TREE1, (250, 250))
-TREE2_sprite = pygame.transform.scale(TREE2, (450, 450))
-TREE3_sprite = pygame.transform.scale(TREE3, (650, 650))
-TREE4_sprite = pygame.transform.scale(TREE4, (465, 465))
+TREE1_sprite = pygame.transform.scale(TREE1, (250, 250))  # уменьшение размера дерева1
+TREE2_sprite = pygame.transform.scale(TREE2, (450, 450))  # уменьшение размера дерева2
+TREE3_sprite = pygame.transform.scale(TREE3, (650, 650))  # уменьшение размера дерева3
+TREE4_sprite = pygame.transform.scale(TREE4, (465, 465))  # уменьшение размера дерева4
 
-FLOWER1_sprite = pygame.transform.scale(FLOWER1, (150, 150))
-FLOWER2_sprite = pygame.transform.scale(FLOWER2, (125, 125))
+FLOWER1_sprite = pygame.transform.scale(FLOWER1, (150, 150))  # уменьшение размера цветка1
+FLOWER2_sprite = pygame.transform.scale(FLOWER2, (125, 125))  # уменьшение размера цветка2
 
 
 def draw_level():
@@ -102,15 +102,15 @@ def draw_level():
     Отрисовываем статичный фон (цветочки, деревья, облака, вот это всё)
     :return:
     """
-    bg.blit(TREE1_sprite, TREE1_sprite.get_rect(x=635, y=750))
-    bg.blit(TREE2_sprite, TREE2_sprite.get_rect(x=65, y=550))
-    bg.blit(TREE3_sprite, TREE3_sprite.get_rect(x=800, y=425))
-    bg.blit(TREE4_sprite, TREE4_sprite.get_rect(x=1500, y=565))
+    bg.blit(TREE1_sprite, TREE1_sprite.get_rect(x=635, y=750))  # создание дерева1
+    bg.blit(TREE2_sprite, TREE2_sprite.get_rect(x=65, y=550))  # создание дерева2
+    bg.blit(TREE3_sprite, TREE3_sprite.get_rect(x=800, y=425))  # создание дерева3
+    bg.blit(TREE4_sprite, TREE4_sprite.get_rect(x=1500, y=565))  # создание дерева4
 
-    bg.blit(FLOWER1_sprite, FLOWER1_sprite.get_rect(x=1250, y=880))
-    bg.blit(FLOWER2_sprite, FLOWER2_sprite.get_rect(x=120, y=890))
+    bg.blit(FLOWER1_sprite, FLOWER1_sprite.get_rect(x=1250, y=880))  # создание цветка1
+    bg.blit(FLOWER2_sprite, FLOWER2_sprite.get_rect(x=120, y=890))  # создание цветка2
 
-    bg.blit(GRASS_sprite, GRASS_sprite.get_rect(x=0, y=630))
+    bg.blit(GRASS_sprite, GRASS_sprite.get_rect(x=0, y=630))  # создание травы
     bg.blit(GRASS_sprite, GRASS_sprite.get_rect(x=635, y=630))
     bg.blit(GRASS_sprite, GRASS_sprite.get_rect(x=635*2, y=630))
 
