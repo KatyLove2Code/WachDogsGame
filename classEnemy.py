@@ -23,13 +23,13 @@ for image in walk:
     runAnimation.append(pygame.transform.scale(image, (ENEMY_W, ENEMY_H)))
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, groups, x, y, width, height):
+    def __init__(self, groups, x, y, height):
         super().__init__(groups)
         self.animCount = 0
         self.image = runAnimation[self.animCount]
-
         self.rect = self.image.get_rect(x=x, bottom = y+height)
         self.speedX = 1
+
 
         # Движение по Y
         # self.speedY = 0

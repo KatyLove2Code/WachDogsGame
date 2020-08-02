@@ -30,6 +30,7 @@ enemy_group = pygame.sprite.Group()  # Группа врагов
 
 hero = Hero(all_sprites_group, USER_SCREEN_H)  # Создаём персонажа по шаблону из класса
 
+
 # ФУНКЦИИ
 
 def drawWindow():
