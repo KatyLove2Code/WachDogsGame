@@ -1,30 +1,12 @@
 import pygame
-
+from settings import USER_SCREEN_H, USER_SCREEN_W
 
 pygame.init()
 
 # ШРИФТЫ
 fontImpact = pygame.font.SysFont("Impact", 72)
 
-#Узнаём операционну систему
-from sys import platform
 
-## выясняем размер экрана пользователя
-if platform == "linux" or platform == "linux2":
-    from screeninfo import get_monitors
-    for m in get_monitors():
-        print(m)
-        data = str(m).split(',')
-        USER_SCREEN_W = int(data[2].split('=')[1])
-        USER_SCREEN_H = int(data[3].split('=')[1])
-
-        print(USER_SCREEN_W, USER_SCREEN_H)
-elif platform == "darwin":
-    print(platform)
-elif platform == "win32":
-    import ctypes
-    user32 = ctypes.windll.user32
-    USER_SCREEN_W, USER_SCREEN_H = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 
 
 BUTTON_H = int(USER_SCREEN_H * 0.25)

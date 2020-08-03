@@ -1,5 +1,5 @@
 import pygame
-
+from settings import USER_SCREEN_H, USER_SCREEN_W
 
 platform_image = pygame.image.load("Tiles/Map/untitled - 2020-08-01T144248.637.png")
 
