@@ -92,3 +92,4 @@ class Menu():
             self.buttons[self.activeButton].active = False
             self.activeButton += 1
             self.buttons[self.activeButton].active = True
+
