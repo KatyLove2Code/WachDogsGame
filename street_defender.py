@@ -5,11 +5,9 @@ from level import level
 from classPlatform import Platform
 from classEnemy import Enemy
 
-## выясняем размер экрана пользователя
-import ctypes
+from settings import USER_SCREEN_H, USER_SCREEN_W
 
-user32 = ctypes.windll.user32
-USER_SCREEN_W, USER_SCREEN_H = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1) - 200
+
 
 # настраиваем экран
 pygame.init()
@@ -70,7 +68,7 @@ def showMenu():
                 if event.key == 13:
                     if menu.activeButton == 0:  # Если выбрано "START GAME"
                         return
-                    elif menu.activeButton == 1:
+                    elif menu.activeButton == 2:
                         pygame.quit()
 
         menu.update()
@@ -78,7 +76,23 @@ def showMenu():
 
 GRASS = pygame.image.load("Tiles/Map/untitled - 2020-08-01T143755.478.png")  # трава
 
-GRASS_sprite = pygame.transform.scale(GRASS, (65, 65))
+TREE1 = pygame.image.load("Tiles/Map/untitled - 2020-07-17T194613.279.png")  # дерево№1
+TREE2 = pygame.image.load("Tiles/Map/untitled - 2020-07-17T195149.536.png")  # дерево№2
+TREE3 = pygame.image.load("Tiles/Map/untitled - 2020-07-17T195540.200.png")  # дерево№3
+TREE4 = pygame.image.load("Tiles/Map/untitled - 2020-07-17T194842.678.png")  # дерево№4
+
+FLOWER1 = pygame.image.load("Tiles/Map/untitled - 2020-07-17T200113.601.png")  # цветок№1
+FLOWER2 = pygame.image.load("Tiles/Map/untitled - 2020-07-17T200151.579.png")  # цветок№2
+
+GRASS_sprite = pygame.transform.scale(GRASS, (650, 650))  # уменьшение размера травы
+
+TREE1_sprite = pygame.transform.scale(TREE1, (250, 250))  # уменьшение размера дерева1
+TREE2_sprite = pygame.transform.scale(TREE2, (450, 450))  # уменьшение размера дерева2
+TREE3_sprite = pygame.transform.scale(TREE3, (650, 650))  # уменьшение размера дерева3
+TREE4_sprite = pygame.transform.scale(TREE4, (465, 465))  # уменьшение размера дерева4
+
+FLOWER1_sprite = pygame.transform.scale(FLOWER1, (150, 150))  # уменьшение размера цветка1
+FLOWER2_sprite = pygame.transform.scale(FLOWER2, (125, 125))  # уменьшение размера цветка2
 
 
 def draw_level():
@@ -86,7 +100,18 @@ def draw_level():
     Отрисовываем статичный фон (цветочки, деревья, облака, вот это всё)
     :return:
     """
-    bg.blit(GRASS_sprite, GRASS_sprite.get_rect(x=80, y=1000))
+
+    bg.blit(TREE1_sprite, TREE1_sprite.get_rect(x=635, y=750))  # создание дерева1
+    bg.blit(TREE2_sprite, TREE2_sprite.get_rect(x=65, y=550))  # создание дерева2
+    bg.blit(TREE3_sprite, TREE3_sprite.get_rect(x=800, y=425))  # создание дерева3
+    bg.blit(TREE4_sprite, TREE4_sprite.get_rect(x=1500, y=565))  # создание дерева4
+
+    bg.blit(FLOWER1_sprite, FLOWER1_sprite.get_rect(x=1250, y=880))  # создание цветка1
+    bg.blit(FLOWER2_sprite, FLOWER2_sprite.get_rect(x=120, y=890))  # создание цветка2
+
+    bg.blit(GRASS_sprite, GRASS_sprite.get_rect(x=0, y=630))  # создание травы
+    bg.blit(GRASS_sprite, GRASS_sprite.get_rect(x=635, y=630))
+    bg.blit(GRASS_sprite, GRASS_sprite.get_rect(x=635*2, y=630))
 
 
 def create_platforms():
@@ -103,11 +128,14 @@ def create_platforms():
     for line in level:
         for b in line:
             if b == "H":
+                #Перемещаем ГГ на спавн
                 hero.rect.x = x
                 hero.rect.y = y
             elif b == 1:
+                #Создаём спрайт платформы
                 Platform((all_sprites_group, platform_group), x, y, platformSizeX, platformSizeY)
-            elif b == 2:
+            elif b == "E":
+                #Создаём спрайт врага
                 Enemy((all_sprites_group, enemy_group), x, y, platformSizeX, platformSizeY)
 
             x += platformSizeX
