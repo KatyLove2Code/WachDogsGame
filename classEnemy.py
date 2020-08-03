@@ -28,7 +28,7 @@ class Enemy(pygame.sprite.Sprite):
         super().__init__(groups)
         self.animCount = 0
         self.image = runAnimation[self.animCount]
-        self.rect = self.image.get_rect(x=x, bottom=y + height)
+        self.rect = self.image.get_rect(x=x, bottom=y + height + 500)
         self.speedX = 0
         self.Left = False
 
