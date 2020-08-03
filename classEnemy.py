@@ -23,7 +23,7 @@ for image in walk:
     runAnimation.append(pygame.transform.scale(image, (ENEMY_W, ENEMY_H)))
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, groups, x, y, height):
+    def __init__(self, groups, x, y, width, height):
         super().__init__(groups)
         self.animCount = 0
         self.image = runAnimation[self.animCount]
