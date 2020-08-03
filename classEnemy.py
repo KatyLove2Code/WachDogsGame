@@ -1,5 +1,5 @@
 import pygame
-
+from settings import USER_SCREEN_H, USER_SCREEN_W
 
 walk = [pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_00.png"),
         pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_01.png"),
@@ -22,14 +22,15 @@ runAnimation = []
 for image in walk:
     runAnimation.append(pygame.transform.scale(image, (ENEMY_W, ENEMY_H)))
 
+
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, groups, x, y, width, height):
         super().__init__(groups)
         self.animCount = 0
         self.image = runAnimation[self.animCount]
-        self.rect = self.image.get_rect(x=x, bottom = y+height)
-        self.speedX = 1
-
+        self.rect = self.image.get_rect(x=x, bottom=y + height)
+        self.speedX = 0
+        self.Left = False
 
         # Движение по Y
         # self.speedY = 0
@@ -50,6 +51,22 @@ class Enemy(pygame.sprite.Sprite):
         :param platforms:
         :return:
         """
+
+        # враг ходит от края я к краю
+
+        if self.Left == False:
+            self.speedX = SPEED
+            if self.rect.right > USER_SCREEN_W:
+                self.speedX = 0
+                self.Left = True
+        if self.Left == True:
+            self.speedX = -SPEED
+            if self.rect.right < 150:
+                self.speedX = 0
+                self.Left = False
+
+        self.rect.x += self.speedX
+
         # # ТУТ ТОЛЬКО ФИЗИКА И УПРАВЛЕНИЕ, АНИМАЦИЯ В ФУНКЦИЮ АНИМАЦИИ
         # keys = pygame.key.get_pressed()
         #
@@ -87,7 +104,7 @@ class Enemy(pygame.sprite.Sprite):
         #     self.onGrond = True
         #     self.speedY = 0
 
-        #self.check_collizion(platforms)
+        # self.check_collizion(platforms)
         self.animation()
 
     def check_collizion(self, platforms):
@@ -104,8 +121,6 @@ class Enemy(pygame.sprite.Sprite):
         else:
             self.speedY += self.grav
 
-
-
     def animation(self):
         '''
         ВСЯ АНИМАЦИЯ ПЕРСОНАЖА
@@ -120,5 +135,3 @@ class Enemy(pygame.sprite.Sprite):
             self.image = runAnimation[self.animCount]  # Достаю картинку с нужным номером из списка
             if self.speedX > 0:  # Если двигаюсь вправо,
                 self.image = pygame.transform.flip(self.image, True, False)  # то отзеркаливаю картинку персонажа
-
-

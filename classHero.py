@@ -42,7 +42,7 @@ idle = [pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_00.png"
 
 HERO_W = 165
 HERO_H = 165
-SPEED = 10
+SPEED = 15
 JUMP = 20
 
 

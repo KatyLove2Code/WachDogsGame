@@ -134,7 +134,7 @@ def create_platforms():
             elif b == 1:
                 #Создаём спрайт платформы
                 Platform((all_sprites_group, platform_group), x, y, platformSizeX, platformSizeY)
-            elif b == 2:
+            elif b == "E":
                 #Создаём спрайт врага
                 Enemy((all_sprites_group, enemy_group), x, y, platformSizeX, platformSizeY)
 
