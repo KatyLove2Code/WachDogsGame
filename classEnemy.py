@@ -37,7 +37,7 @@ class Enemy(pygame.sprite.Sprite):
         self.grav = 2  # гравитация - скорость движения вниз
         self.onGrond = True  # Стоит на земле
         self.isJump = False  # прыгает или нет
-        self.GROUND = y + height
+        self.GROUND = y + height + 32.5
 
         #  # Джойстик
         # self.padOn = True  # использовать джойстик
