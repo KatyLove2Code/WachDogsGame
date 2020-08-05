@@ -40,6 +40,23 @@ idle = [pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_00.png"
         pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_09.png"),
         pygame.image.load("Tiles/Character/Animations/Idle/Armature_Idle_10.png")]
 
+attack = [pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_00.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_01.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_02.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_03.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_04.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_05.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_06.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_07.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_08.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_09.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_10.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_11.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_12.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_13.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_14.png"),
+          pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_15.png")]
+
 HERO_W = 165
 HERO_H = 165
 SPEED = 15
@@ -54,6 +71,9 @@ for image in walk:
 idleAnimation = []
 for image in idle:
     idleAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
+attackAnimation = []
+for image in attack:
+    attackAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
 
 
 class Hero(pygame.sprite.Sprite):
@@ -77,7 +97,7 @@ class Hero(pygame.sprite.Sprite):
         self.j_left = False
         self.j_right = False
         self.j_jump = False
-
+        self.attack = True
 
         self.idleLeft = True
         # self.idleRight = False
@@ -123,6 +143,12 @@ class Hero(pygame.sprite.Sprite):
             self.rect.bottom = self.GROUND
             self.onGrond = True
             self.speedY = 0
+
+
+        if keys[pygame.K_e] and self.attack == False  and self.speedX == 0: #атака
+            self.attack = True
+        else:
+            self.attack = False
 
         self.check_collizion(platforms)
         self.animation()
@@ -177,13 +203,19 @@ class Hero(pygame.sprite.Sprite):
             if self.speedX > 0:  # Если двигаюсь вправо,
                 self.image = pygame.transform.flip(self.image, True, False)  # то отзеркаливаю картинку персонажа
 
-        else:  # иначе скорость = 0, значит стою на месте
+        if self.speedX == 0:  # иначе скорость = 0, значит стою на месте
             self.animCount += 1
             if self.animCount == len(idleAnimation):
                 self.animCount = 0
-
             self.image = idleAnimation[self.animCount]
 
             if self.idleLeft == False:
                 self.image = pygame.transform.flip(self.image, True, False)
+
+
+        if self.attack == True:
+            self.animCount += 2
+            if self.animCount == len(attackAnimation):
+                self.animCount = 0
+            self.image = attackAnimation[self.animCount]
 
