@@ -13,8 +13,8 @@ walk = [pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_00.png"),
         pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_09.png"),
         pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_10.png")]
 
-ENEMY_W = 165
-ENEMY_H = 165
+ENEMY_W = 200
+ENEMY_H = 200
 SPEED = 10
 JUMP = 20
 
@@ -37,7 +37,7 @@ class Enemy(pygame.sprite.Sprite):
         self.grav = 2  # гравитация - скорость движения вниз
         self.onGrond = True  # Стоит на земле
         self.isJump = False  # прыгает или нет
-        self.GROUND = y + height
+        self.GROUND = y + height + 40
 
         #  # Джойстик
         # self.padOn = True  # использовать джойстик
