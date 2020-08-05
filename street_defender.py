@@ -169,7 +169,8 @@ while run:
                 run = False
 
     hero.update(platform_group)  # Обновляем героя
-    enemy_group.update()
+    enemy_group.update(hero)
+    bot_group.update()
     # all_sprites_group.update()
     drawWindow()  # обновляем экран
 

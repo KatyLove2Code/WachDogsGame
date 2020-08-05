@@ -13,93 +13,85 @@ walk = [pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_00.png"),
         pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_09.png"),
         pygame.image.load("Tiles/Bots/Bot1/Run/Armature_run_10.png")]
 
+
+damage = [pygame.image.load("Tiles/Bots/Bot1/Damage/Armature_hurt_00.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Damage/Armature_hurt_01.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Damage/Armature_hurt_02.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Damage/Armature_hurt_03.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Damage/Armature_hurt_04.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Damage/Armature_hurt_05.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Damage/Armature_hurt_06.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Damage/Armature_hurt_07.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Damage/Armature_hurt_08.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Damage/Armature_hurt_09.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Damage/Armature_hurt_10.png")]
+
+die = [pygame.image.load("Tiles/Bots/Bot1/Die/Armature_die_00.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Die/Armature_die_01.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Die/Armature_die_02.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Die/Armature_die_03.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Die/Armature_die_04.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Die/Armature_die_05.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Die/Armature_die_06.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Die/Armature_die_07.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Die/Armature_die_08.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Die/Armature_die_09.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Die/Armature_die_10.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Die/Armature_die_11.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Die/Armature_die_12.png"),
+        pygame.image.load("Tiles/Bots/Bot1/Die/Armature_die_13.png")]
+
+
 ENEMY_W = 200
 ENEMY_H = 200
 SPEED = 10
-JUMP = 20
 
-runAnimation = []
-for image in walk:
-    runAnimation.append(pygame.transform.scale(image, (ENEMY_W, ENEMY_H)))
 
+
+def transform_image(list_image):
+    transformed_image = []
+    for image in list_image:
+        w = image.get_width()
+        scale =   image.get_height()  // ENEMY_H
+        transformed_image.append(pygame.transform.scale(image, (w//scale, ENEMY_H)))
+    return transformed_image
+
+runAnimation = transform_image(walk)
+damageAnimation = transform_image(damage)
+dieAnimation = transform_image(die)
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, groups, x, y, width, height):
         super().__init__(groups)
         self.animCount = 0
         self.image = runAnimation[self.animCount]
-        self.rect = self.image.get_rect(x=x, bottom=y + height + 500)
-        self.speedX = 0
+        self.rect = self.image.get_rect(x=x, bottom=USER_SCREEN_H)
+
+        self.speedX = SPEED
         self.Left = False
 
-        #Движение по Y
-        self.speedY = 0
-        self.grav = 2  # гравитация - скорость движения вниз
-        self.onGrond = True  # Стоит на земле
-        self.isJump = False  # прыгает или нет
-        self.GROUND = y + height + 40
+        self.gettingDamage = False
+        self.dying = False
+        self.heals = 100
 
-        #  # Джойстик
-        # self.padOn = True  # использовать джойстик
-        # self.j_left = False
-        # self.j_right = False
-        # self.j_jump = False
 
-    def update(self):
+
+    def update(self, hero):
         """
         Функция запускается из главной программы постоянно(в цикле)
-        :param platforms:
         :return:
         """
 
         # враг ходит от края я к краю
+        if self.rect.right > USER_SCREEN_W or self.rect.left < 0:
+            self.speedX *= -1
 
-        if self.Left == False:
-            self.speedX = SPEED
-            if self.rect.right > USER_SCREEN_W:
-                self.speedX = 0
-                self.Left = True
-        if self.Left == True:
-            self.speedX = -SPEED
-            if self.rect.right < 150:
-                self.speedX = 0
-                self.Left = False
+        if not self.gettingDamage and not self.dying:
+            self.rect.x += self.speedX
 
-        self.rect.x += self.speedX
-
-
-        #
-        # if keys[pygame.K_SPACE] and self.onGrond:
-        #     self.speedY -= JUMP
-        #     self.onGrond = False
-        #
-        # self.rect.x += self.speedX
-        self.rect.y += self.speedY
-        #
-        if not self.onGrond:
-            self.speedY += self.grav
-        #
-        if self.rect.bottom >= self.GROUND:
-            self.rect.bottom = self.GROUND
-            self.onGrond = True
-            self.speedY = 0
-
-        # self.check_collizion(platforms)
+        self.check_damage(hero)
         self.animation()
 
-    def check_collizion(self, platforms):
-        """
-        Проверка на столкновение с платформами
-        :return:
-        """
-        if pygame.sprite.spritecollideany(self, platforms):
-
-            if self.speedY != 0:
-                if self.speedY > 0:
-                    self.onGrond = True
-                self.speedY = 0
-        else:
-            self.speedY += self.grav
 
     def animation(self):
         '''
@@ -107,11 +99,42 @@ class Enemy(pygame.sprite.Sprite):
         :return:
         '''
 
-        if self.speedX != 0:  # Если скорость по Х не нулевая, значит я иду
-            self.animCount += 1  # Счётчик подсчитывает, какую картинку по счёту я должен показать
-            if self.animCount == len(runAnimation):  # если я дошёл до последней картинки в списке картинок
+        if self.dying:
+            if self.animCount == len(dieAnimation):  # если я дошёл до последней картинки в списке картинок
+                self.kill()
+            else:
+                self.image = dieAnimation[self.animCount]
+
+
+        elif self.gettingDamage:
+            if self.animCount == len(damageAnimation):  # если я дошёл до последней картинки в списке картинок
                 self.animCount = 0  # то обнуляю счётчик, чтобы начать сначала
+                self.gettingDamage = False
+            self.image = damageAnimation[self.animCount]
+
+
+
+        else:
+            if self.animCount == len(runAnimation):  # если я дошёл до последней картинки в списке картинок
+                    self.animCount = 0  # то обнуляю счётчик, чтобы начать сначала
 
             self.image = runAnimation[self.animCount]  # Достаю картинку с нужным номером из списка
+
             if self.speedX > 0:  # Если двигаюсь вправо,
-                self.image = pygame.transform.flip(self.image, True, False)  # то отзеркаливаю картинку персонажа
+                    self.image = pygame.transform.flip(self.image, True, False)  # то отзеркаливаю картинку персонажа
+
+        self.animCount += 1  # Увеличиваю счётчик
+
+    def check_damage(self, hero):
+        if self.rect.colliderect(hero.rect) and hero.attack:
+            if not self.gettingDamage:
+                self.animCount = 0
+                self.gettingDamage = True
+            else:
+                self.heals -= hero.damage
+
+        if self.heals<=0:
+            self.dying  = True
+
+
+

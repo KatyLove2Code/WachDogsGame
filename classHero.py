@@ -57,23 +57,30 @@ attack = [pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_0
           pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_14.png"),
           pygame.image.load("Tiles/Character/Animations/Attack/Armature_Attack_15.png")]
 
-HERO_W = 165
+#HERO_W = 165
 HERO_H = 165
 SPEED = 15
 JUMP = 20
 
 
 
-runAnimation = []
-for image in walk:
-    runAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
+def transform_image(list_image):
+    transformed_image = []
+    for image in list_image:
+        w = image.get_width()
+        scale =   image.get_height()  // HERO_H
+        transformed_image.append(pygame.transform.scale(image, (w//scale, HERO_H)))
+    return transformed_image
 
-idleAnimation = []
-for image in idle:
-    idleAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
-attackAnimation = []
-for image in attack:
-    attackAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
+#RUN
+runAnimation = transform_image(walk)
+
+#STAND
+idleAnimation = transform_image(idle)
+
+#ATTAC
+attackAnimation = transform_image(attack)
+
 
 
 class Hero(pygame.sprite.Sprite):
@@ -101,6 +108,9 @@ class Hero(pygame.sprite.Sprite):
 
         self.idleLeft = True
         # self.idleRight = False
+
+
+        self.damage = 5 #Урон, который герой наносит врагам
 
     def update(self, platforms):
         """
