@@ -65,7 +65,7 @@ class Enemy(pygame.sprite.Sprite):
         super().__init__(groups)
         self.animCount = 0
         self.image = runAnimation[self.animCount]
-        self.rect = self.image.get_rect(x=x, bottom=USER_SCREEN_H)
+        self.rect = self.image.get_rect(x=x, bottom=USER_SCREEN_H - 50)
 
         self.speedX = SPEED
         self.Left = False
