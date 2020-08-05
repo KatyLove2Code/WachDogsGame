@@ -4,6 +4,7 @@ from class_menu import Menu
 from level import level
 from classPlatform import Platform
 from classEnemy import Enemy
+from classBird import Bird
 
 from settings import USER_SCREEN_H, USER_SCREEN_W
 
@@ -25,6 +26,7 @@ FPS = 60
 all_sprites_group = pygame.sprite.Group()  # Группа вообще всех игровы объектов
 platform_group = pygame.sprite.Group()  # Группа платформ
 enemy_group = pygame.sprite.Group()  # Группа врагов
+bot_group = pygame.sprite.Group()  #Группа животных
 
 hero = Hero(all_sprites_group, USER_SCREEN_H)  # Создаём персонажа по шаблону из класса
 
@@ -39,6 +41,7 @@ def drawWindow():
     win.blit(bg, (0, 0))  # фон
     platform_group.draw(win)  # Отрисвываем платформы
     enemy_group.draw(win)
+    bot_group.draw(win)
     win.blit(hero.image, hero.rect)  # главный герой
     pygame.display.update()  # обновление экрана
 
@@ -68,7 +71,7 @@ def showMenu():
                 if event.key == 13:
                     if menu.activeButton == 0:  # Если выбрано "START GAME"
                         return
-                    elif menu.activeButton == 2:
+                    elif menu.activeButton == 1:
                         pygame.quit()
 
         menu.update()
@@ -137,6 +140,9 @@ def create_platforms():
             elif b == "E":
                 #Создаём спрайт врага
                 Enemy((all_sprites_group, enemy_group), x, y, platformSizeX, platformSizeY)
+            elif b == "B":
+                Bird((all_sprites_group, bot_group), x, y, platformSizeX, platformSizeY)
+
 
             x += platformSizeX
         x = 0
