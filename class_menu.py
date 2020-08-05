@@ -68,9 +68,9 @@ class Menu():
         self.win = win  # Экран для отрисовки
 
         self.activeButton = 0  # Бывшая переменная num, какая кнопка сейчас активна
-        self.buttons = [Button("START", (BUTTON_H) * 0),
+        self.buttons = [Button("START", (BUTTON_H) * 0+230),
                         #Button("OPTIONS", (BUTTON_H) * 1),
-                        Button("EXIT", (BUTTON_H) * 1),
+                        Button("EXIT", (BUTTON_H) * 1+270),
                         ]
 
     def update(self):
