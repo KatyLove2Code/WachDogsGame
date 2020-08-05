@@ -68,7 +68,7 @@ def showMenu():
                 if event.key == 13:
                     if menu.activeButton == 0:  # Если выбрано "START GAME"
                         return
-                    elif menu.activeButton == 2:
+                    elif menu.activeButton == 1:
                         pygame.quit()
 
         menu.update()
