@@ -4,3 +4,6 @@
 *.pyc
 __pycache__/classEnemy.cpython-38.pyc
 *.pyc
+*.xml
+.idea/workspace.xml
+__pycache__/classEnemy.cpython-38.pyc
